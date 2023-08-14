@@ -3,6 +3,8 @@ import {Route, Routes} from "react-router-dom";
 import {AboutPage} from "pages/AboutPage";
 import {MainPage} from "pages/MainPage";
 import {routeConfig} from "shared/config/routeConfig/routeConfig";
+import { classNames } from 'shared/lib/classNames/classNames';
+
 
 const AppRouter = () => {
     return (
@@ -14,7 +16,7 @@ const AppRouter = () => {
                         path={path}
                         element={(
                             <Suspense fallback={<div>Loading...</div>}>
-                                <div className="page-wrapper">
+                                <div  className={classNames(null, {}, ["page-wrapper"])}>
                                     {element}
                                 </div>
                             </Suspense>
