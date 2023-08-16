@@ -1,5 +1,8 @@
 {
   "MainPage": "Главная страница",
-  "mainLink": "Главная",
-  "Languages": "Русский"
+  "MainLink": "Войти",
+  "Languages": "Русский",
+  "Orders":"Заказы",
+  "Products":"Продукты"
+
 }

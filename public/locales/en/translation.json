@@ -1,5 +1,8 @@
 {
   "MainPage": "Main page",
-  "mainLink": "Main",
-  "Languages": "English"
+  "MainLink": "Login",
+  "Languages": "English",
+  "Orders":"Orders",
+  "Products":"Products"
+
 }

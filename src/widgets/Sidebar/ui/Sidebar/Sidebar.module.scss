@@ -7,6 +7,38 @@
     transition: width 0.3s;
 }
 
+.sideMenu {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 40px;
+}
+.sideMenuLink {
+    margin-top: 15px;
+    &::after {
+        content : "";
+         position : relative; 
+         display: flex;
+         width : 0%; 
+         left : 0;
+         bottom: -10px;
+         transition: 0.3s;
+    }
+    &:hover:after {
+        content : "";
+         position : relative; 
+         display: flex;
+         background-color : var(--secondary-color); 
+         height :3px; 
+         width : 60%; 
+         left : 40px;
+         bottom: -10px;
+    }
+}
+//
+
 .collapsed {
     width: var(--sidebar-width-collapsed);
 }
