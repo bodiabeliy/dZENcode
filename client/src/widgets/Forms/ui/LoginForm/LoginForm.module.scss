@@ -1,0 +1,38 @@
+.registrationConfirm {
+    transform: scale(4);
+    margin: 0 auto;
+    margin-bottom: 70px;
+}
+.registrationFields,
+.formInput {
+    width: 100%;
+    margin-bottom: 12px;
+}
+.registrationButton {
+    width: 100%;
+}
+.submitButton {
+    background-color: var(--primary-button-color);
+    border: none !important;
+    font-family: var(--font-family);
+    font-weight: var(--font-bold);
+    color: var(--primary-button-text);
+    border-radius: var(--primary-button-radius);
+    width: 100%;
+}
+
+.emailConfirm {
+    width: 100%;
+    width: 346px;
+    text-align: center;
+    font-family: var(--font-family);
+    & p {
+        font-weight: var(--font-bold);
+        font-size: 18px;
+    }
+    & label  {
+        font-weight: var(--font-pre-bold);
+
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,5 @@
+{
+    "ServerPort": 8000,
+    "DataBaseURL": "mongodb+srv://bogdan:superpershing1@cloudestore.5se8b.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "secretKey":"cloud-store-secret"
+}
