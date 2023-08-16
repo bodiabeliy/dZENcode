@@ -28,8 +28,8 @@ export const Sidebar = ({className}: SidebarProps) => {
            <div className={classNames(null, {}, ["sideBar__wrapper"])}>
             <div className={cls.sideMenu}>
             <Image />
-                <AppLink className={cls.sideMenuLink} to={"/about"}>{t("Orders")}</AppLink>
-                <AppLink className={cls.sideMenuLink} to={"/"}>{t("Products")}</AppLink>
+                <AppLink className={cls.sideMenuLink} to={"/orders"}>{t("Orders")}</AppLink>
+                <AppLink className={cls.sideMenuLink} to={"/products"}>{t("Products")}</AppLink>
                 {/* <AppLink to={"/"}>fgd</AppLink>
                 <AppLink to={"/"}>fdju</AppLink>
                 <AppLink to={"/"}>sx</AppLink> */}
