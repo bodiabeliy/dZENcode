@@ -2,10 +2,13 @@
   "MainPage": "Главная страница",
   "RegisterLink": "Регистрация",
   "LoginLink": "Войти",
+  "LogoutLink":"Выйти",
   "Languages": "Русский",
   "Orders":"Заказы",
   "Products":"Продукты",
-  "formName":"Регистрация",
+  "registrationFormName":"Регистрация",
+  "authorizationFormName": "Авторизация",
+
   "userName":"Логин пользователя",
   "userPassword":"Пароль пользователя"
 }

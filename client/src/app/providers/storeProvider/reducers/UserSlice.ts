@@ -56,7 +56,7 @@ export const registerUser = async (email: string, password: string) => {
 };
 
 // авторизация пользователя
-export const Login = (email: string, password: string) => async (dispatch: AppDispatch) => {
+export const loginUser = (email: string, password: string) => async (dispatch: AppDispatch) => {
   try {
     const response = await api.post(`/auth/login`, {
       email,

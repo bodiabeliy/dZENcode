@@ -1,6 +1,6 @@
 import { FC, useState, useCallback, useEffect, memo } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { registerUser, UserEmailSelector } from "app/providers/storeProvider/reducers/UserlSlice"
+import { registerUser, loginUser, UserEmailSelector } from "app/providers/storeProvider/reducers/UserSlice"
 
 import Col from 'react-bootstrap/Col';
 import Form from "react-bootstrap/esm/Form";
@@ -24,11 +24,18 @@ export const LoginForm:FC<LoginFormProps> = memo(({formType}) => {
     const handleSubmit = (e:any) => {
      e.preventDefault()
 
-     //@ts-ignore
-     dispatch(registerUser(form.username, form.userpassword))
+     
      const newErrors = findFormErrors()
     if ( Object.keys(newErrors).length > 0 ) {
       setErrors(newErrors)
+    }
+    if (formType =="registrationForm") {
+      //@ts-ignore
+      dispatch(registerUser(form.username, form.userpassword))
+    }
+    if (formType =="loginForm") {
+      //@ts-ignore
+      dispatch(loginUser(form.username, form.userpassword))
     }
     };
     
@@ -75,8 +82,8 @@ export const LoginForm:FC<LoginFormProps> = memo(({formType}) => {
       {
         formType =="registrationForm" ?
         // <FormContainer 
-        //   formName={t("formName")} 
-        //   formNameGroups={[
+        //   registrationFormName={t("registrationFormName")} 
+        //   registrationFormNameGroups={[
         //     {
         //       FieldLabel:"Login",
         //       FieldType:"email",
@@ -98,7 +105,7 @@ export const LoginForm:FC<LoginFormProps> = memo(({formType}) => {
         //   ]}
         //  />
         <Form>
-          <h1>{t("formName")}</h1>
+          <h1>{t("registrationFormName")}</h1>
           <Form.Group as={Col} md="12" controlId="validationCustom01">
             <Form.Label>{t("userName")}</Form.Label>
             <Form.Control
@@ -132,7 +139,7 @@ export const LoginForm:FC<LoginFormProps> = memo(({formType}) => {
       </Form>
     :formType == "loginForm" ?
       <Form>
-        <h1>Авторизация</h1>
+        <h1>{t("authorizationFormName")}</h1>
         <Form.Group as={Col} md="12" controlId="validationCustom04">
           <Form.Label>{t("userName")}</Form.Label>
           <Form.Control

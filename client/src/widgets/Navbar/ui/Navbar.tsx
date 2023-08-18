@@ -6,11 +6,15 @@ import { useTranslation } from "react-i18next";
 import { Modal } from "shared/ui/Modal/Modal";
 import { LoginForm } from "widgets/Forms";
 import { useCallback, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { UserIsAuthSelector, logoutUserSuccess } from "app/providers/storeProvider/reducers/UserSlice";
 interface NavbarProps {
     className?: string;
 }
 
 export const Navbar = ({className}: NavbarProps) => {
+    const isAuthorization = useSelector(UserIsAuthSelector)
+    const dispatch = useDispatch()
     const { t, i18n } = useTranslation();
     const [isRegistrationOpen, setIsRegstrationOpen] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
@@ -46,6 +50,13 @@ export const Navbar = ({className}: NavbarProps) => {
         }
     }, [formType])
 
+    
+    const Logout = useCallback((formType:string) => {
+        dispatch(logoutUserSuccess());
+        localStorage.removeItem('token');
+        setFormType("")
+    }, [])
+
     return (
         <>
         <Modal isOpen={formType =="registrationForm"?isRegistrationOpen:isOpen} onClose={() => CloseModal(formType)} children={<LoginForm formType={formType} />}/>
@@ -57,16 +68,32 @@ export const Navbar = ({className}: NavbarProps) => {
                 </div>
             </div>
             <div className={cls.links}>
-                <AppLink 
-                    onClick={() => OpenModal("registrationForm")}
-                    theme={AppLinkTheme.SECONDARY} to={'/'} className={cls.RegisterLink}>
-                {t('RegisterLink')}
-                </AppLink>
-                <AppLink 
-                    onClick={() => OpenModal("loginForm")}
-                    theme={AppLinkTheme.SECONDARY} to={'/'} className={cls.LoginLink}>
-                {t('LoginLink')}
-                </AppLink>
+                {isAuthorization == false ?
+                    <>
+                    <AppLink 
+                        onClick={() => OpenModal("registrationForm")}
+                        theme={AppLinkTheme.SECONDARY} to={'/'} className={cls.RegisterLink}>
+                        {t('RegisterLink')}
+                    </AppLink>
+                    <AppLink 
+                        onClick={() => OpenModal("loginForm")}
+                        theme={AppLinkTheme.SECONDARY} to={'/'} className={cls.LoginLink}>
+                        {t('LoginLink')}
+                    </AppLink>
+                    </>
+                :<>
+                    Пользователь в системе
+                    <div className="">
+
+                    </div>
+                    <AppLink 
+                        onClick={() => Logout(formType)}
+                        theme={AppLinkTheme.SECONDARY} to={'/'} className={cls.LoginLink}>
+                        {t('Logout')}
+                    </AppLink>
+                </>
+                }
+                
             </div>
         </div>
         </>

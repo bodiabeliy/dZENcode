@@ -14,8 +14,8 @@ export enum ThemeForm {
 interface FormProps {
     className?: string;
     theme?: ThemeForm;
-    formName:string;
-    formNameGroups:FormGroup[];
+    registrationFormName:string;
+    registrationFormNameGroups:FormGroup[];
 }
 
 interface FormGroup {
@@ -29,7 +29,7 @@ interface FormGroup {
 }
 
 export const FormContainer: FC<FormProps> = (props) => {
-    const {formName, formNameGroups }= props
+    const {registrationFormName, registrationFormNameGroups }= props
 
 
     const handleSubmit = (e:any) => {
@@ -78,8 +78,8 @@ export const FormContainer: FC<FormProps> = (props) => {
   }
    return (
     <Form>
-    <h1>{formName}</h1>
-    {formNameGroups.map((fieldGroup:FormGroup, index) => {
+    <h1>{registrationFormName}</h1>
+    {registrationFormNameGroups.map((fieldGroup:FormGroup, index) => {
         console.log("fieldGroup", fieldGroup);
         
         return (
