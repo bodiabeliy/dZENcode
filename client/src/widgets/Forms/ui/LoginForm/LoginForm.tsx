@@ -1,315 +1,173 @@
-import { Button, Input, Form } from "antd";
 import { FC, useState, useCallback, useEffect, memo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux'
+import { registerUser, UserEmailSelector } from "app/providers/storeProvider/reducers/UserlSlice"
 
-import {Modal} from "shared/ui/Modal/Modal"
-import ConfirmationIcon from "shared/assets/Confirmation.svg"
-import KeyIcon from "shared/assets/Key.svg"
+import Col from 'react-bootstrap/Col';
+import Form from "react-bootstrap/esm/Form";
+import { useTranslation } from "react-i18next";
+import { Button } from "shared/ui/Button/Button";
 
-
+import { classNames } from "shared/lib/classNames/classNames";
 import cls from "./LoginForm.module.scss"
-import { classNames } from "shared/lib/helpers/classNames";
-import { 
-    IsLoginUserSelector,
-    UserEmailSelector, 
-    UserPasswordSelector, 
-    registerUser,
-    loginUser, 
-    activateUser,
-    setUserEmail, 
-    setUserPassword, 
-    isAuthUserSelector
-} from "entities/User/services/UserSlice";
-import { useNavigate } from "react-router-dom";
+
 interface LoginFormProps {
-    formType:string
+    formType?:string
 }
 
+
+
 export const LoginForm:FC<LoginFormProps> = memo(({formType}) => {
-    const [form] = Form.useForm();
-    const navigate = useNavigate();
+    const { t, i18n } = useTranslation();
+    const count = useSelector(UserEmailSelector)
+    const dispatch = useDispatch()
 
-    const [isLoginModal, setIsLoginModal] = useState(false);
-    const [passwordVisible, setPasswordVisible] = useState(false);
-    const [confirmPasswordVisible, setConfirmPasswordVisibleVisible] = useState(false);
-    const [passwordIsEqual, setPasswordIsEqual] = useState(false)
-    const [isCode, setIsCode] = useState(false)
-    const [confirmationCode, setConfirmationCode] = useState("")
+    const handleSubmit = (e:any) => {
+     e.preventDefault()
 
-    const dispatch = useDispatch();
-    const email = useSelector(UserEmailSelector)
-    const password = useSelector(UserPasswordSelector)
-    const isLoginUser = useSelector(IsLoginUserSelector)
-    const isAuthorization = useSelector(isAuthUserSelector);
-
-    
-   const RegistrateUserEmail =useCallback((email:string) => {
-    dispatch(setUserEmail(email))
-   }, [dispatch, email])
-
-   const RegistrateUserPassword =useCallback((password:string) => {
-    dispatch(setUserPassword(password))
-   }, [dispatch, password])
-
-   const Submit = useCallback(() => {
-    //@ts-ignore
-    dispatch(registerUser(email, password))
-    onCloseModal()
-   }, [dispatch, email, password, isLoginUser])
-
-   const Login = useCallback(() => {
-        //@ts-ignore
-        dispatch(loginUser(email, password))
-        navigate("/userProfile")
-
-   }, [dispatch, email, password, isAuthorization])
-
-   const UserEmailActivation = useCallback(() => {
-    //@ts-ignore
-    dispatch(activateUser())
-    onCloseModal()
-   }, [dispatch])
-   
-
-    const onCloseModal = useCallback(() => {
-        setIsLoginModal((prev) => !prev);
-    }, [isLoginModal]);
-
-    const confirmEmail = (code:string) => {
-        
-        setConfirmationCode(prev => prev) 
-        if (code.length ==6) {
-            setIsCode(!isCode)
-        }
-        else setIsCode(false)
-        console.log("confirmationCode", confirmationCode);
-        
+     //@ts-ignore
+     dispatch(registerUser(form.username, form.userpassword))
+     const newErrors = findFormErrors()
+    if ( Object.keys(newErrors).length > 0 ) {
+      setErrors(newErrors)
     }
+    };
     
-       
+    const [ form, setForm ] = useState({
+      username:"",
+      userpassword:""
+
+    })
+    const [ errors, setErrors ] = useState<any>({
+      username:"",
+      userpassword:""
+    })
+
+
+    const setField = (field:any, value:any) => {
+      
+      setForm({...form, [field]: value })
+
+      // Check and see if errors exist, and remove them from the error object:
+      if ( !!errors[field] ) setErrors({
+        ...errors,
+        [field]: null
+      })
+      console.log({field, form});
+      
+      return {field, form}
+    }
+
+    const findFormErrors = () => {
+      const { username, userpassword } = form
+      const newErrors = {
+        username:"",
+        userpassword:""
+      }
+      if ( !username || username === '' ) newErrors.username = 'User name!'
+      if ( userpassword.length <8 ) newErrors.userpassword = 'password must be more than 8!'
+     
+  
+      return newErrors
+  }
 
     return ( 
     <>
-        {
-        formType =="registration" ?
-        <Form
-            form={form}
-            name="register"
-            scrollToFirstError
-        >
-            <div className={cls.registrationFields}>
-                <p>Email</p>
-                <Form.Item
-                    name="email"
-                    rules={[
-                    {
-                        type: 'email',
-                        message: 'x Не верный формат почты!',
-                    },
-                    {
-                        required: true,
-                        message: 'Поле email не должно быть пустым!'
-                    },
-                    
-                    ]}
-                >
-                    <Input
-                            className={classNames("registrationEmail", {}, [cls.formInput,])}
-                            placeholder="Адресс почты" 
-                            onChange={(e) => RegistrateUserEmail(e.target.value)}
-                            value={email}
-                        />
-                </Form.Item>
-                    
-                <p>Придумайте пароль</p>
-                
-                <Form.Item
-                    name="password"
-                    rules={[
-                    {
-                        required: true,
-                        message: 'Поле пароля не должно быть пустым!',
-                    },
-                    {
-                        pattern:/^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!#$%\-_=+<>])([a-zA-Z0-9!#$%\-_=+<>]+)$/,
-                        message: `Буквенная часть пароля должна содержать как строчные, так и прописные (заглавные) буквы`
-                    },
-                    { min: 8, message: 'Длина пароля должна быть не менее 8 символов!' },
-                    { max: 14, message: 'Длина пароля должна быть более 14 символов!' },
+      {
+        formType =="registrationForm" ?
+        // <FormContainer 
+        //   formName={t("formName")} 
+        //   formNameGroups={[
+        //     {
+        //       FieldLabel:"Login",
+        //       FieldType:"email",
+        //       FieldPlaceholder:"test@gmail.com",
+        //       FieldValue:form.username,
+        //       FieldChange:((e) => setForm({...form, username:e.target.value})),
+        //       FieldIsValid:!!errors.username
 
-                    ]}
-                    hasFeedback
-                >
-                    <Input.Password
-                        className={classNames("registrationPassword", {}, [cls.formInput])}
-                        placeholder="Придумайте пароль"
-                        suffix={<KeyIcon />}
-                        visibilityToggle={{ visible: passwordVisible, onVisibleChange: setPasswordVisible }}
-                        onChange={(e) => RegistrateUserPassword(e.target.value)}
-                        value={password}
-                    />
-                </Form.Item>
-                   
-                <p>Повторите пароль</p>
-                <Form.Item
-                    name="confirm"
-                    dependencies={['password']}
-                    hasFeedback
-                    rules={[
-                    {
-                        required: true,
-                        message: 'Поле пароля не должно быть пустым!',
-                    },
-                    ({ getFieldValue }) => ({
-                        validator(_, value) {
-                        if (!value || getFieldValue('password') === value) {
-                            setPasswordIsEqual(true)
-                            return Promise.resolve();
-                        }
-                        setPasswordIsEqual(false)
-                        return Promise.reject(new Error('Пароли не совпадают!'));
-                        },
-                    })
-                    ]}
-                >
-                    <Input.Password
-                        className={classNames("registrationConfirmPassword", {}, [cls.formInput])}
-                        placeholder="Повторите пароль"
-                        suffix={<KeyIcon />}
-                        visibilityToggle={{ visible: confirmPasswordVisible, onVisibleChange: setConfirmPasswordVisibleVisible }}
-                        value={password}
+        //     },
+        //     {
+        //       FieldLabel:"Password",
+        //       FieldType:"password",
+        //       FieldPlaceholder:"Dfgfbvv_2",
+        //       FieldValue:form.userpassword,
+        //       FieldChange:((e) => setField('userpassword', e.target.value)),
+        //       FieldIsValid:!!errors.userpassword
 
-                    />
-                </Form.Item>
-                    
-                <Button
-                    className={classNames("registrationButton", {}, [cls.submitButton])}
-                    disabled={!passwordIsEqual}
-                    onClick={() => Submit()}
-                    >Зарегистрироватся
-                </Button>
-            </div>
-         </Form>
-        :formType =="login" ?
-        
-        <Form
-            form={form}
-            name="login"
-            scrollToFirstError
-        >
-            <div className={cls.registrationFields}>
-                <p>Email</p>
-                <Form.Item
-                    name="email"
-                    rules={[
-                    {
-                        type: 'email',
-                        message: 'x Не верный формат почты!',
-                    },
-                    {
-                        required: true,
-                        message: 'Поле email не должно быть пустым!'
-                    },
-                    ]}
-                >
-                    <Input
-                            className={classNames("registrationEmail", {}, [cls.formInput])}
-                            placeholder="Адресс почты" 
-                            onChange={(e) => e.target.value}
-                            value={email}
-                        />
-                </Form.Item>
-                    
-                <p>Введите пароль</p>
-                
-                <Form.Item
-                    name="password"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Поле пароля не должно быть пустым!',
-                        },
-                        {
-                            pattern:/^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!#$%\-_=+<>])([a-zA-Z0-9!#$%\-_=+<>]+)$/,
-                            message: `Буквенная часть пароля должна содержать как строчные, так и прописные (заглавные) буквы`
-                        },
-                        { min: 8, message: 'Длина пароля должна быть не менее 8 символов!' },
-                        { max: 14, message: 'Длина пароля должна быть более 14 символов!' },
-    
-                        ]}
-                    hasFeedback
-                >
-                    <Input.Password
-                        className={classNames("registrationPassword", {}, [cls.formInput])}
-                        placeholder="Введите пароль"
-                        suffix={<KeyIcon />}
-                        visibilityToggle={{ visible: passwordVisible, onVisibleChange: setPasswordVisible }}
-                        value={password}
-                    />
-                </Form.Item>
- 
-                <Button
-                    className={classNames("registrationButton", {}, [cls.submitButton])}
-                    onClick={() => Login()}
-                    >Войти
-                </Button>
-            </div>
-         </Form>        
-        :formType =="emailConfirm"?
-        <Form
-        form={form}
-        name="emailConfirm"
-        className={classNames(cls.emailConfirm)}
-        scrollToFirstError
-    >
-        <div className={cls.registrationFields}>
-            <p>Подтверждение E-Mail </p>
-            <span>
-            Мы отправили SMS с 6-значным кодом подтверждения на почту: <b>{email}</b>
-            </span>
-            <Form.Item
-                name="emailConfirm"
-                label="SMS-код"
-                rules={[
-                    
-                ]}
-            >
-                
-            </Form.Item>
-            <Input
-                        className={classNames("registrationEmail", {}, [cls.formInput])}
-                        placeholder="Укажите код" 
-                        onChange={(e) => confirmEmail(e.target.value)}
-                    />
-            <Button
-                className={classNames("emailConfirmation", {}, [cls.submitButton])}
-                onClick={() => UserEmailActivation()}
-                disabled={!isCode}
-                >Потвердить
-            </Button>
-        </div>
-     </Form>  
-        :null}
+        //     }
+        //   ]}
+        //  />
+        <Form>
+          <h1>{t("formName")}</h1>
+          <Form.Group as={Col} md="12" controlId="validationCustom01">
+            <Form.Label>{t("userName")}</Form.Label>
+            <Form.Control
+              required
+              type="email"
+              placeholder="test@gmail.com"
+              value={form.username}
+              onChange={e => setField('username', e.target.value) }
+              isInvalid={!!errors.username}
+            />
+            <Form.Control.Feedback type="invalid">{errors.username}</Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group as={Col} md="12" controlId="validationCustom02">
+            <Form.Label>{t("userPassword")}</Form.Label>
+            <Form.Control
+              required
+              type="password"
+              placeholder="Last name"
+              value={form.userpassword}
+              onChange={e => setField('userpassword', e.target.value) }
+              isInvalid={!!errors.userpassword}
 
-        {
-            isLoginUser == true && (
-                <Modal isOpen={isLoginModal} onClose={() =>onCloseModal()} className="registrationModal">
-                    <ConfirmationIcon className={cls.registrationConfirm}/>
-                    {formType == "registration"?
-                     <span>
-                        Аккаунт был успешно зарегистрирован.<br />
-                        На ваш E-Mail отправлено письмо с ссылкой для подтверждения
-                    </span>:
-                    formType == "emailConfirm"?
-                    <span>
-                    Поздравляем!Ваша почта.<br /> <b>{email}</b> была успешно активирована!
-                    </span>
-                    : null}
-                   
-            </Modal>
-            )
-        }
-        
+            />
+            <Form.Control.Feedback type="invalid">{errors.userpassword}</Form.Control.Feedback>
+
+            {/* <Form.Control.Feedback>Looks good!</Form.Control.Feedback> */}
+          </Form.Group>
+        <Button
+        className={cls.submitBtn} 
+        onClick={(e) => handleSubmit(e)} type="submit">Submit form</Button>
+      </Form>
+    :formType == "loginForm" ?
+      <Form>
+        <h1>Авторизация</h1>
+        <Form.Group as={Col} md="12" controlId="validationCustom04">
+          <Form.Label>{t("userName")}</Form.Label>
+          <Form.Control
+            required
+            type="email"
+            placeholder="test@gmail.com"
+            value={form.username}
+            onChange={e => setField('username', e.target.value) }
+            isInvalid={!!errors.username}
+          />
+          <Form.Control.Feedback type="invalid">{errors.username}</Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group as={Col} md="12" controlId="validationCustom02">
+          <Form.Label>{t("userPassword")}</Form.Label>
+          <Form.Control
+            required
+            type="password"
+            placeholder="Last name"
+            value={form.userpassword}
+            onChange={e => setField('userpassword', e.target.value) }
+            isInvalid={!!errors.userpassword}
+
+          />
+          <Form.Control.Feedback type="invalid">{errors.userpassword}</Form.Control.Feedback>
+
+          {/* <Form.Control.Feedback>Looks good!</Form.Control.Feedback> */}
+        </Form.Group>
+      <Button
+      className={cls.submitBtn} 
+      onClick={(e) => handleSubmit(e)} type="submit">Submit form</Button>
+    </Form>
+        :null
+    }
+
+
     </> 
     );
 })

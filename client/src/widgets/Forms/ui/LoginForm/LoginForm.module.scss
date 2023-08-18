@@ -11,14 +11,10 @@
 .registrationButton {
     width: 100%;
 }
-.submitButton {
-    background-color: var(--primary-button-color);
-    border: none !important;
-    font-family: var(--font-family);
-    font-weight: var(--font-bold);
-    color: var(--primary-button-text);
-    border-radius: var(--primary-button-radius);
-    width: 100%;
+.submitBtn {
+    color: var(--third-color);
+    background-color: var(--third-color);
+    border-radius: 15px;
 }
 
 .emailConfirm {

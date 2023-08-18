@@ -2,7 +2,7 @@
 @import "variables/global";
 @import "themes/normal";
 @import "themes/dark";
-
+@import 'bootstrap/dist/css/bootstrap.min.css';
 .app {
     font: var(--font-m);
 

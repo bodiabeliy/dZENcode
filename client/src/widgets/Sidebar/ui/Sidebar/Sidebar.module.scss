@@ -2,7 +2,7 @@
     height: calc(100vh - var(--navbar-height));
     width: var(--sidebar-width);
     background: var(--bg-color);
-    box-shadow:inset -15px 0px 10px -15px var(--inverted-border-shadow-color);
+    box-shadow:inset -15px 0px 10px -15px var(--secondary-color);
     position: relative;
     transition: width 0.3s;
 }

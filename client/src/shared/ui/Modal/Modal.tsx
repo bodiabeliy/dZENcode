@@ -84,7 +84,7 @@ export const Modal = (props: ModalProps) => {
                     <div
                         className={cls.content}
                         onClick={onContentClick}
-                    >gfnfbvb
+                    >
                         {children}
                     </div>
                 </div>

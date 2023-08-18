@@ -1,8 +1,11 @@
 {
   "MainPage": "Главная страница",
-  "MainLink": "Войти",
+  "RegisterLink": "Регистрация",
+  "LoginLink": "Войти",
   "Languages": "Русский",
   "Orders":"Заказы",
-  "Products":"Продукты"
-
+  "Products":"Продукты",
+  "formName":"Регистрация",
+  "userName":"Логин пользователя",
+  "userPassword":"Пароль пользователя"
 }

@@ -1,8 +1,11 @@
 {
   "MainPage": "Main page",
-  "MainLink": "Login",
+  "RegisterLink": "Registration",
+  "LoginLink": "Login",
   "Languages": "English",
   "Orders":"Orders",
-  "Products":"Products"
-
+  "Products":"Products",
+  "formName":"Registration",
+  "userName":"Login",
+  "userPassword":"Password"
 }
