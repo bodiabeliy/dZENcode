@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import {Route, Routes} from "react-router-dom";
 import {routeConfig} from "shared/config/routeConfig/routeConfig";
 import { classNames } from 'shared/lib/classNames/classNames';
+import { Loader } from 'shared/ui/Loader/Loader';
 
 
 const AppRouter = () => {
@@ -15,14 +16,13 @@ const AppRouter = () => {
     }, [])
     
     return (
-        <Suspense fallback={<div>Loading...</div>}>
             <Routes>
                 {Object.values(routeConfig).map(({element, path}) => (
                     <Route
                         key={path}
                         path={path}
                         element={(
-                            <Suspense fallback={<div>Loading...</div>}>
+                            <Suspense fallback={<Loader />}>
                                 <div  className={classNames("page-wrapper", {}, ["main-page"])}>
                                     {element}
                                 </div>
@@ -31,7 +31,6 @@ const AppRouter = () => {
                     />
                 ))}
             </Routes>
-        </Suspense>
     );
 };
 

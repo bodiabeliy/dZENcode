@@ -23,8 +23,17 @@
     text-transform: uppercase;
     margin-left: 10px;
     margin-top: 10px;
-    color: var(--third-color);
 }
-.navbar__userPanel {
-    
+.logoText,
+.navbar_username {
+    color: var(--third-color);
+
+}
+
+.borderd {
+    margin-left: 10px;
+    padding: 3px;
+    border: 1px solid var(--third-color);
+    border-radius: 10px;
+
 }

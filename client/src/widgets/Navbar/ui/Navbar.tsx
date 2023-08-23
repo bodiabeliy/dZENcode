@@ -24,7 +24,7 @@ export const Navbar = ({className}: NavbarProps) => {
     const [isRegistrationOpen, setIsRegstrationOpen] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
     const [formType, setFormType] = useState('')
-    const [date, setDate] = useState<string>("")
+    const [date, setDate] = useState<any>("")
 
     
     const updateTimeRef = useRef<NodeJS.Timeout>()
@@ -109,23 +109,24 @@ export const Navbar = ({className}: NavbarProps) => {
                 :<>
                    
                     <div className={cls.navbar__userPanel}>
-                        <div className={cls.navbar__userTime}>
-                            {date}
-                        </div>
-                            <div className={cls.navbar__userSession}>
+                            {date.weekDays}
+                            {date.monthNames}
+
                             {
                                 userSesstion == 1 ? 
-                                <span> {t("currentSession")+ ":"+ userEmail?.split("@")[0]}</span>
+                                <div>
+                                    <span> {t("currentSession")+ ":"}</span>
+                                    <span className={cls.navbar_username}> { userEmail?.split("@")[0]}</span>
+                                    <AppLink 
+                                        onClick={() => Logout(formType)}
+                                        theme={AppLinkTheme.SECONDARY} to={'/'} className={classNames("", {}, [cls.borderd])}>
+                                        {t('Logout')}
+                                    </AppLink>  
+                                </div>
                                 : <span>{t("countSession")+ ": "+ userSesstion }</span>
                             }
-
-                            </div>
                     </div>
-                    <AppLink 
-                        onClick={() => Logout(formType)}
-                        theme={AppLinkTheme.SECONDARY} to={'/'} className={cls.LoginLink}>
-                        {t('Logout')}
-                    </AppLink>
+                   
                 </>
                 }
                 

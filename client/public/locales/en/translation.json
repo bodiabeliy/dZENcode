@@ -11,6 +11,7 @@
 
   "userName":"Login",
   "userPassword":"Password",
+  "Logout":"Logout",
   "currentSession":"User",
   "countSession":"sesstion count"
 }

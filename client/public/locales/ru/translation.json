@@ -11,6 +11,7 @@
 
   "userName":"Логин пользователя",
   "userPassword":"Пароль пользователя",
+  "Logout":"Выход",
   "currentSession":"Пользователь",
   "countSession":"Кол-во сесий"
 }
