@@ -16,6 +16,8 @@ export function buildPlugins({paths, isDev}: BuildOptions): webpack.WebpackPlugi
         }),
         new webpack.DefinePlugin({
             __IS_DEV__: JSON.stringify(isDev),
+            __BASE_URL:JSON.stringify("http://localhost:8000")
+            
         })
     ]
 }

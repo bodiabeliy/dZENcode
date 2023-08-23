@@ -5,27 +5,49 @@ import Logo from "shared/assets/icons/logo.svg"
 import { useTranslation } from "react-i18next";
 import { Modal } from "shared/ui/Modal/Modal";
 import { LoginForm } from "widgets/Forms";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { UserIsAuthSelector, logoutUserSuccess } from "app/providers/storeProvider/reducers/UserSlice";
+import { UserCurrentSesstionCountSelector, UserEmailSelector, UserIsAuthSelector, logoutUserSuccess, userSessionCount } from "app/providers/storeProvider/reducers/UserSlice";
+import { SocketClient } from "shared/lib/socketClient/socketClient";
+import { dateFormater } from "shared/lib/dateFormater/dateFormater";
 interface NavbarProps {
     className?: string;
 }
 
 export const Navbar = ({className}: NavbarProps) => {
     const isAuthorization = useSelector(UserIsAuthSelector)
+    const userSesstion = useSelector(UserCurrentSesstionCountSelector)
+    const userEmail = useSelector(UserEmailSelector)
     const dispatch = useDispatch()
     const { t, i18n } = useTranslation();
+
     const [isRegistrationOpen, setIsRegstrationOpen] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
-
     const [formType, setFormType] = useState('')
+    const [date, setDate] = useState<string>("")
 
+    
+    const updateTimeRef = useRef<NodeJS.Timeout>()
+    useEffect(()=> {
+        if (isAuthorization) {
+            SocketClient.connect()
+            SocketClient.on("sesstionCountUpdate", (sesstionCounter:number) => { 
+                console.log("sesstionCounter", sesstionCounter);
+                
+                dispatch(userSessionCount(sesstionCounter))
+            })
+        }
+    }, [isAuthorization, dispatch])
+
+    useEffect(() => {
+        updateTimeRef.current =setInterval(() => {
+            setDate(dateFormater(new Date()))
+        }, 1000)
+    }, [date])
 
     const OpenModal = useCallback((formType:string) => {
 
         if (formType == "registrationForm") {
-            console.log("formType0", formType);
             setFormType(formType)
 
             setIsRegstrationOpen(true)
@@ -55,7 +77,10 @@ export const Navbar = ({className}: NavbarProps) => {
         dispatch(logoutUserSuccess());
         localStorage.removeItem('token');
         setFormType("")
-    }, [])
+        SocketClient.disconnect()
+        clearInterval(updateTimeRef.current)
+
+    }, [date])
 
     return (
         <>
@@ -64,7 +89,7 @@ export const Navbar = ({className}: NavbarProps) => {
             <div className={cls.logo}>
                 <Logo />
                 <div className={cls.logoText}>
-                    inventory
+                    Inventory
                 </div>
             </div>
             <div className={cls.links}>
@@ -82,9 +107,19 @@ export const Navbar = ({className}: NavbarProps) => {
                     </AppLink>
                     </>
                 :<>
-                    Пользователь в системе
-                    <div className="">
+                   
+                    <div className={cls.navbar__userPanel}>
+                        <div className={cls.navbar__userTime}>
+                            {date}
+                        </div>
+                            <div className={cls.navbar__userSession}>
+                            {
+                                userSesstion == 1 ? 
+                                <span> {t("currentSession")+ ":"+ userEmail?.split("@")[0]}</span>
+                                : <span>{t("countSession")+ ": "+ userSesstion }</span>
+                            }
 
+                            </div>
                     </div>
                     <AppLink 
                         onClick={() => Logout(formType)}

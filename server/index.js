@@ -3,26 +3,29 @@ const cors = require('cors')
 const mogoose = require("mongoose")
 const config  = require("config")
 const authRouter = require("./routes/authorization")
-const path = require("path")
-const expressWs = require('express-ws')
+const http = require('http');
+const { Server } = require("socket.io");
+
+
 
 const app = express()
-expressWs((ws, req) => {
-    ws.on('message', (msg) => {
-        msg = JSON.parse(msg)
-        switch (msg.method) {
-            case "connection":
-                connectionHandler(ws, msg)
-                break
-            case "draw":
-                broadcastConnection(ws, msg)
-                break
-        }
+const server = http.createServer(app);
+const io = new Server(server, {
+    cors: {
+        origin: "*",
+        allowedHeaders:'*'
+    }
+});
+
+let sesstions = 0;
+io.on("connection", (socket) => {
+    sesstions++
+    socket.broadcast.emit('sesstionCountUpdate', sesstions);
+    socket.on("disconnect", () => {
+        sesstions--
+        socket.broadcast.emit('sesstionCountUpdate', sesstions);
     })
 })
-
-// web Sockets
-
 
 // прослойка для передачи запросов на все домены
 app.use(cors({
@@ -44,10 +47,10 @@ const serverStart = async () => {
     try {
         // подключение к БД monoose
         mogoose.connect(config.get("DataBaseURL"))
-
+        mogoose.set('strictQuery', false)
 
         // для запуска сервера (по порту с соответствующим действием)
-        app.listen(PORT, () => {
+        server.listen(PORT, () => {
             console.log(`Server was started on ${PORT}`);
         })
         

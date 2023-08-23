@@ -10,5 +10,7 @@
   "authorizationFormName": "Авторизация",
 
   "userName":"Логин пользователя",
-  "userPassword":"Пароль пользователя"
+  "userPassword":"Пароль пользователя",
+  "currentSession":"Пользователь",
+  "countSession":"Кол-во сесий"
 }

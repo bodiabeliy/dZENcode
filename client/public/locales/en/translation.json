@@ -8,6 +8,9 @@
   "Products":"Products",
   "registrationFormName":"Registration",
   "authorizationFormName": "Authorization",
+
   "userName":"Login",
-  "userPassword":"Password"
+  "userPassword":"Password",
+  "currentSession":"User",
+  "countSession":"sesstion count"
 }
