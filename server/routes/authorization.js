@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const {check, validationResult} = require("express-validator")
 
-const fileController = require("../controllers/fileController")
+const userController = require("../controllers/UserController")
 
 
 const authRouter = new Router()
@@ -84,7 +84,7 @@ async (request, responce ) => {
 })
 
 // jwt-токен пользователя
-authRouter.get('/auth', fileController.getUserToken,
+authRouter.get('/auth', userController.getUserToken,
 async (request, responce ) => {
     try {
         const user = await User.findOne({_id:request.user.id})
@@ -105,4 +105,34 @@ async (request, responce ) => {
     }
 })
 
+
+
+
+
+// тестовые данные
+const orders = [
+    {
+      id: 1,
+      title: 'Order 1',
+      date: '2017-06-29 12:09:33',
+      description: 'desc',
+      
+    },
+    {
+      id: 2,
+      title: 'Order 2',
+      date: '2017-06-29 12:09:33',
+      description: 'desc',
+    },
+    {
+      id: 3,
+      title: 'Order 3',
+      date: '2017-06-29 12:09:33',
+      description: 'desc',
+    },
+  ];
+
+  authRouter.get('/orders',  async (req, res) => {
+    res.json(orders);
+  });
 module.exports = authRouter

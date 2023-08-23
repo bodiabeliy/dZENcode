@@ -40,10 +40,12 @@ export const Navbar = ({className}: NavbarProps) => {
     }, [isAuthorization, dispatch])
 
     useEffect(() => {
-        updateTimeRef.current =setInterval(() => {
-            setDate(dateFormater(new Date()))
-        }, 1000)
-    }, [date])
+        if (isAuthorization) {
+            updateTimeRef.current =setInterval(() => {
+                setDate(dateFormater(new Date()))
+            }, 1000)
+        }
+    }, [date, isAuthorization])
 
     const OpenModal = useCallback((formType:string) => {
 
