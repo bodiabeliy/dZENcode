@@ -7,6 +7,7 @@ import { useTheme } from 'app/providers/ThemeProvider';
 import cls from './Modal.module.scss';
 
 interface ModalProps {
+    type:string;
     className?: string;
     children?: ReactNode;
     isOpen?: boolean;
@@ -23,6 +24,7 @@ export const Modal = (props: ModalProps) => {
         isOpen,
         onClose,
         lazy,
+        type
     } = props;
 
     const [isClosing, setIsClosing] = useState(false);
@@ -86,7 +88,7 @@ export const Modal = (props: ModalProps) => {
             <div className={classNames(cls.Modal, mods, [className, theme])}>
                 <div className={cls.overlay} onClick={closeHandler}>
                     <div
-                        className={cls.content}
+                        className={classNames(cls.content)}
                         onClick={onContentClick}
                     >
                         {children}

@@ -13,7 +13,12 @@ body {
 
     min-height: 100vh;
 }
-
+button {
+    color: var(--primary-color);
+}
+svg {
+    margin-right: 5px;
+}
 .content-page {
     display: flex;
 }

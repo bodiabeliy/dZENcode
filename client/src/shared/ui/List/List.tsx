@@ -31,7 +31,7 @@ export const List =({columns, order}:ListProps) => {
 
   return (
    <>
-    <Modal isOpen={iszModalOpen} onClose={() => CloseModal()} children={<RemovePopup order={remove} />} />
+    <Modal  type="action" isOpen={iszModalOpen} onClose={() => CloseModal()} children={<RemovePopup order={remove} />} />
     <Container className={cls.ItemRow}>
       {columns.map((column, indx) => {
         console.log("children", columns[order.id]);

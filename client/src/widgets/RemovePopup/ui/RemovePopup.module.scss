@@ -1,6 +1,18 @@
 .removeModal__wrapper {
     width: 100%;
 }
+
+.removeModal__header {
+    font-weight: bold;
+    font-size: 1.35rem;
+    padding: 10px;
+    margin-bottom: 25px;
+}
+
+.removeModal__wrapper ::before :first-child {
+    content: ":";
+    color: red;
+}
 .removeModal__actions {
     background-color: var(--third-color);
     display: flex;
@@ -8,17 +20,27 @@
     height: 100px;
     width: 100%;
     align-items: center;
+    margin-top: 5px;
 }
 .actionBtn {
     padding: 5px;
-    color: red;
     border-radius:30px;
     border:  none;
     width: 120px;
 }
 .actionBtn:first-child {
-margin-right: 20px;
+    color: var(--secondary-color);
+    margin-right: 20px;
 }
 .actionBtn:last-child {
     margin-right: 10px;
+    color: red;
+
+}
+.removeModal__body {
+    display: flex;
+    align-items: center;
+}
+.removeModal__item {
+    margin-left: 50px;
 }

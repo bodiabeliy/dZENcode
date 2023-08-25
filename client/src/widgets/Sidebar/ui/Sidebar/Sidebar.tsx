@@ -7,6 +7,8 @@ import { AppLink } from "shared/ui/AppLink/AppLink";
 import { Image } from "shared/ui/Image/Image";
 import { useTranslation } from "react-i18next";
 
+import UserIcon from "shared/assets/icons/user-32-32.png"
+
 interface SidebarProps {
     className?: string;
 }
@@ -27,7 +29,7 @@ export const Sidebar = ({className}: SidebarProps) => {
            {/* <button onClick={onToggle}>toggle</button> */}
            <div className={classNames(null, {}, ["sideBar__wrapper"])}>
             <div className={cls.sideMenu}>
-            <Image />
+            <Image image={UserIcon} />
                 <AppLink className={cls.sideMenuLink} to={"/orders"}>{t("Orders")}</AppLink>
                 <AppLink className={cls.sideMenuLink} to={"/products"}>{t("Products")}</AppLink>
                 {/* <AppLink to={"/"}>fgd</AppLink>

@@ -1,12 +1,12 @@
 import {classNames} from "shared/lib/classNames/classNames";
 import cls from './Image.module.scss';
 import {ButtonHTMLAttributes, FC} from "react";
-import UserIcon from "shared/assets/icons/user-32-32.png"
 export enum ThemeImage {
     CLEAR = 'clear',
 }
 
 interface ImageProps extends ButtonHTMLAttributes<HTMLImageElement>{
+    image:string
     className?: string;
     theme?: ThemeImage;
 }
@@ -22,7 +22,7 @@ export const Image: FC<ImageProps> = (props) => {
         <img
             className={classNames(cls.Image, {[cls[theme]]: true}, [className])}
             {...otherProps}
-            src={UserIcon}
+            src={props.image}
             width={"70px"}
          />
             

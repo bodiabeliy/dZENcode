@@ -86,7 +86,7 @@ export const Navbar = ({className}: NavbarProps) => {
 
     return (
         <>
-        <Modal isOpen={formType =="registrationForm"?isRegistrationOpen:isOpen} onClose={() => CloseModal(formType)} children={<LoginForm formType={formType} />}/>
+        <Modal isOpen={formType =="registrationForm"?isRegistrationOpen:isOpen} onClose={() => CloseModal(formType)} children={<LoginForm formType={formType} />} type="login"/>
         <div className={classNames(cls.Navbar, {}, [className])}>
             <div className={cls.logo}>
                 <Logo />
