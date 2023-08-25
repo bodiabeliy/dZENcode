@@ -1,3 +1,7 @@
 {
-  "pageTitle": "Oprders Page"
+  "pageTitle": "Oprders Page",
+  "removeModalTitle":"Do you actualy want delete this order?",
+  "cancelRemove":"Cancel",
+  "uproveRemove":"Delete"
+
 }

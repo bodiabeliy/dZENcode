@@ -1,0 +1,24 @@
+.removeModal__wrapper {
+    width: 100%;
+}
+.removeModal__actions {
+    background-color: var(--third-color);
+    display: flex;
+    justify-content: flex-end;
+    height: 100px;
+    width: 100%;
+    align-items: center;
+}
+.actionBtn {
+    padding: 5px;
+    color: red;
+    border-radius:30px;
+    border:  none;
+    width: 120px;
+}
+.actionBtn:first-child {
+margin-right: 20px;
+}
+.actionBtn:last-child {
+    margin-right: 10px;
+}

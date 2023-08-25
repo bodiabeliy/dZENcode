@@ -22,7 +22,7 @@ const initialState: UserState = {
 
 export const userState = createSlice({
   
-  name: 'counter',
+  name: 'user',
   initialState,
   reducers: {
     loginUserSuccess: (state, action) => {
@@ -38,9 +38,7 @@ export const userState = createSlice({
     },
 
     userSessionCount: (state, action: PayloadAction<number>) => {
-      
       state.sesstioionCount = action.payload
-
     },
   },
 })

@@ -1,10 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import thunk from 'redux-thunk';
 import UserReducer from "./reducers/UserSlice"
-import { useDispatch } from 'react-redux';
+import OrderReducer from "./reducers/OrderSlice"
 
 const rootReducer = combineReducers({ 
-    UserReducer
+    UserReducer,
+    OrderReducer
  })
 export const store = configureStore({
   reducer: rootReducer,

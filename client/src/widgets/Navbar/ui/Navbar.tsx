@@ -4,12 +4,12 @@ import {AppLink, AppLinkTheme} from "shared/ui/AppLink/AppLink";
 import Logo from "shared/assets/icons/logo.svg"
 import { useTranslation } from "react-i18next";
 import { Modal } from "shared/ui/Modal/Modal";
-import { LoginForm } from "widgets/Forms";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { UserCurrentSesstionCountSelector, UserEmailSelector, UserIsAuthSelector, logoutUserSuccess, userSessionCount } from "app/providers/storeProvider/reducers/UserSlice";
 import { SocketClient } from "shared/lib/socketClient/socketClient";
 import { dateFormater } from "shared/lib/dateFormater/dateFormater";
+import { LoginForm } from "widgets/Forms/ui/LoginForm/LoginForm";
 interface NavbarProps {
     className?: string;
 }
