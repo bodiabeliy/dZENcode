@@ -22,6 +22,7 @@ const AboutPage = () => {
     }, [Authorization])
     return (
         <div>
+            {Authorization == true?
             <div className={classNames(cls.pageWrapper, {}, ["products"])}>
             {t('pageTitle')}
             {orders.map((order:Order) => {
@@ -30,6 +31,11 @@ const AboutPage = () => {
                 )}
             )}
             </div>
+            :
+            <div className="">
+                 {t('pageTitleNotAuthorized')}
+            </div>
+            }
         </div>
     );
 };

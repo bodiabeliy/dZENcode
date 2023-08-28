@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
 import { DateTimeFormmater } from 'shared/lib/dateFormater/dateFormater';
+import TrashIcon from 'shared/assets/icons/trash.svg';
 
 
 interface ListProps {
@@ -76,8 +77,8 @@ export const List =({columns, order}:ListProps) => {
                 { "price"}
               </div> 
               :
-            <ActionButton onClick={() =>RemoveOrder(order) } />
-            }
+            <ActionButton isBorder={false} iconImage={<TrashIcon />} onClick={() =>RemoveOrder(order) } />
+            } 
           </Col>
           )
       })}

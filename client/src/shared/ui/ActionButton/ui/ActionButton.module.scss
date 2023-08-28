@@ -1,3 +1,10 @@
-.ActionButton {
-
+.actionBorderd {
+    border-radius: 50%;
+    background-color: var(--third-color);
+    width: 30px;
+    height: 30px;
+    >svg {
+        margin: 0 auto !important;
+        fill: var(--bg-color);
+    }
 }

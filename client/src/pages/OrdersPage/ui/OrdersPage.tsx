@@ -10,7 +10,8 @@ import {Orders} from "widgets/Orders"
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from "./OrdersPage.module.scss"
 import { DropDirection } from 'react-bootstrap/esm/DropdownContext';
-
+import { ActionButton } from 'shared/ui/ActionButton';
+import AddButton from "shared/assets/icons/AddButton.svg"
 
 
 
@@ -67,17 +68,26 @@ const AboutPage = () => {
     return (
         Authorization ?
         <div>
+            
             <div className={classNames(cls.pageWrapper, {}, ["orders"])}>
+            <div className={cls.orderTitle}>
+                <ActionButton isBorder={true} iconImage={<AddButton />} onClick={() =>{} } />
+                <h1>{t("pageTitle", { orders: orders.length })}</h1>
+            </div>
+            <div className="ordersList">
             {orders.map((order:Order, index) => (
                 ['end'].map(
                     (direction:DropDirection) => (
                         <Orders order={order} orders={orders} direction={direction} columns={columns} index={index} />
-                        
                     ),
                 )
             ))}
             </div>
-        </div>:null
+        </div>
+        </div>:
+        <div className="">
+            {t('pageTitleNotAuthorized')}
+        </div>
     );
 };
 
