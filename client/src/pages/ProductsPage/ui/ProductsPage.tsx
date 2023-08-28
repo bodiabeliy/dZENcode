@@ -6,7 +6,7 @@ import {useTranslation} from "react-i18next";
 import { useSelector } from 'react-redux';
 import { classNames } from 'shared/lib/classNames/classNames';
 
-import cls from "./Products.module.scss"
+import cls from "./ProductsPage.module.scss"
 
 
 const AboutPage = () => {
@@ -24,9 +24,11 @@ const AboutPage = () => {
         <div>
             <div className={classNames(cls.pageWrapper, {}, ["products"])}>
             {t('pageTitle')}
-            {orders.map((order:Order) => (
-                <p>{order.title}</p>
-            ))}
+            {orders.map((order:Order) => {
+                return (
+                    <p>{order.title}</p>
+                )}
+            )}
             </div>
         </div>
     );

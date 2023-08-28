@@ -1,0 +1,17 @@
+{
+  "MainPage": "Main page",
+  "RegisterLink": "Registration",
+  "LoginLink": "Login",
+  "LogoutLink":"Logout",
+  "Languages": "English",
+  "Orders":"Orders",
+  "Products":"Products",
+  "registrationFormName":"Registration",
+  "authorizationFormName": "Authorization",
+
+  "userName":"Login",
+  "userPassword":"Password",
+  "Logout":"Logout",
+  "currentSession":"User",
+  "countSession":"sesstion count"
+}

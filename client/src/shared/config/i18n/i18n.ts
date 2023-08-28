@@ -3,10 +3,12 @@ import { initReactI18next } from 'react-i18next';
 
 import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import intervalPlural from 'i18next-intervalplural-postprocessor';
 
 i18n
     .use(Backend)
     .use(LanguageDetector)
+    .use(intervalPlural)
     .use(initReactI18next)
     .init({
         fallbackLng: 'en',
@@ -17,7 +19,7 @@ i18n
         },
 
         backend: {
-            loadPath: '/locales/{{lng}}/{{ns}}.json',
+            loadPath: 'http://localhost:8000/locales/{{lng}}/{{ns}}.json',
         }
     });
 

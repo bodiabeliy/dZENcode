@@ -1,4 +1,17 @@
 .ItemRow {
     display: flex;
     align-items: center;
-  }
+}
+
+.orderTitle {
+  text-decoration: underline;
+
+}
+.colunm-1 {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+.colunm-1>div {
+  font-size: 1.3rem;
+}

@@ -1,38 +1,41 @@
 export default interface Order {
   id:number;
-  title:String;
-  date:String,
-  description:String
+  title:string;
+  date:string,
+  description:string
   products:Product[]
 }
 
 interface Product {
   id:number;
-  tiserialNumbertle:Number;
-  photo:String;
-  title:String;
-  type:String;
-  specification:String;
+  tiserialnumbertle:number;
+  photo:string;
+  title:string;
+  type:string;
+  specification:string;
   guarantee:DatePeriod;
   price:ProductPrice[];
-  date:String;
+  date:string;
 }
 
 interface DatePeriod {
- start:String;
- end:String;
+ start:string;
+ end:string;
 }
 
 interface ProductPrice {
-  value:Number;
-  symbol:String;
-  isDefault:Number
+  value:number;
+  symbol:string;
+  isDefault:number
 }
  
 
 
 export interface ColumnsProps {
-  name:String;
-  index:any;
+  name:string;
+  index:number;
   MdSize:any;
+  textAlign?:any;
+  cellAlign?:any
+
 }

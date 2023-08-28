@@ -2,6 +2,8 @@
 @import "variables/global";
 @import "themes/normal";
 @import "themes/dark";
+@import "bootstrap/resetDefault";
+
 @import 'bootstrap/dist/css/bootstrap.min.css';
 
 body {
@@ -34,21 +36,3 @@ svg {
 }
 
 
-// Reassign boostrap styles
-.btn-secondary {
-    background-color: var(--bg-color);
-    border: 1px solid var(--third-color);
-    color: var(--primary-color);
-    margin-top: 10px;
-}
-.btn.btn-secondary:first-child {
-    width: 100%;
-
-}
-.dropend.btn-group {
-    width: 75%;
-}
-.btn:hover {
-    color: var(--primary-color);
-    background-color:  var(--bg-color);
-}

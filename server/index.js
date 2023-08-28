@@ -36,7 +36,7 @@ app.use(cors({
 app.use(express.json())
 
 //маршуты
-
+app.use("/locales", express.static("locales"));
 app.use('/api/auth', authRouter)
 // app.use('/api/files', fileRouter)
 

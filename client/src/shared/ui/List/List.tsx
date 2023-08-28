@@ -7,18 +7,33 @@ import cls from "./List.module.scss"
 import { ActionButton } from '../ActionButton';
 import { Modal } from '../Modal/Modal';
 import { RemovePopup } from 'widgets/RemovePopup/ui/RemovePopup';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { classNames } from 'shared/lib/classNames/classNames';
+import { useTranslation } from 'react-i18next';
+import { DateTimeFormmater } from 'shared/lib/dateFormater/dateFormater';
+
+
 interface ListProps {
     columns:ColumnsProps[]
     order?:Order
 }
 
 export const List =({columns, order}:ListProps) => {
+  const { t, i18n } = useTranslation("orders");
 
   const [iszModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [remove, setRemove] = useState<Order>(null)
+  const [monthByMonths, setMonthByMonths] = useState("")
+  const [fullDate, setFulldate] = useState("")
 
 
+  useEffect(() => {
+    setMonthByMonths(DateTimeFormmater(order.date).monthByMonths)
+  }, [monthByMonths])
+
+  useEffect(() => {
+    setFulldate(DateTimeFormmater(order.date).transformedDate)
+  }, [fullDate])
 
     const RemoveOrder =(orderObject:Order) => {
       setIsModalOpen(true)
@@ -34,15 +49,32 @@ export const List =({columns, order}:ListProps) => {
     <Modal  type="action" isOpen={iszModalOpen} onClose={() => CloseModal()} children={<RemovePopup order={remove} />} />
     <Container className={cls.ItemRow}>
       {columns.map((column, indx) => {
-        console.log("children", columns[order.id]);
           return (
               
-          <Col md={columns[indx].MdSize}>
+          <Col md={columns[indx].MdSize} style={{textAlign:column.textAlign, alignSelf:indx ==1?column.cellAlign:""}}>
             {
-              indx ==0 ? order.title
-              : indx ==1 ?  order.products.length
-              : indx ==2 ?  order.date
-              : indx ==3 ?  "price"
+              indx ==0 ? 
+              <div className={classNames(cls[`colunm-${indx}`], {}, [cls[column.name]])}>
+                {order.title}
+              </div>
+              : indx ==1 ? 
+              <div className={classNames(cls[`colunm-${indx}`], {}, [cls[column.name]])}>
+                <div className="">
+                  {order.products.length}
+                </div>
+                <sub>{t("productsCount")}</sub>
+              </div> 
+              : indx ==2 ?  
+              <div className={classNames(cls[`colunm-${indx}`], {}, [cls[column.name]])}>
+                <sub>{monthByMonths}</sub>
+                <div className="span">
+                  {fullDate}
+                </div>
+              </div> 
+              : indx ==3 ? 
+              <div className={classNames(cls[`colunm-${indx}`], {}, [cls[column.name]])}>
+                { "price"}
+              </div> 
               :
             <ActionButton onClick={() =>RemoveOrder(order) } />
             }

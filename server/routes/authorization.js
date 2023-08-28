@@ -197,4 +197,33 @@ const orders = [
   authRouter.get('/orders', async (req, res) => {
     res.json(orders);
   });
+
+
+//
+  const enTranslation =
+  {
+    "MainPage": "Main page",
+    "RegisterLink": "Registration",
+    "LoginLink": "Login",
+    "LogoutLink":"Logout",
+    "Languages": "English",
+    "Orders":"Orders",
+    "Products":"Products",
+    "registrationFormName":"Registration",
+    "authorizationFormName": "Authorization",
+  
+    "userName":"Login",
+    "userPassword":"Password",
+    "Logout":"Logout",
+    "currentSession":"User",
+    "countSession":"sesstion count"
+  }
+  
+  authRouter.get('/en/translation', async (req, res) => {
+    res.json(enTranslation);
+  });
+
+
+
+
 module.exports = authRouter

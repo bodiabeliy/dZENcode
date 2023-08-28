@@ -1,7 +1,6 @@
 {
   "pageTitle": "Oprders Page",
-  "basket_delivered": "{{count}} basket delivered",
-  "basket_delivered_plural": "{{count}} baskets delivered",
+  "productsCount": "products",
   "removeModalTitle":"Do you actualy want delete this order?",
   "cancelRemove":"Cancel",
   "uproveRemove":"Delete"

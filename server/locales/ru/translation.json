@@ -1,0 +1,17 @@
+{
+  "MainPage": "Главная страница",
+  "RegisterLink": "Регистрация",
+  "LoginLink": "Войти",
+  "LogoutLink":"Выйти",
+  "Languages": "Русский",
+  "Orders":"Заказы",
+  "Products":"Продукты",
+  "registrationFormName":"Регистрация",
+  "authorizationFormName": "Авторизация",
+
+  "userName":"Логин пользователя",
+  "userPassword":"Пароль пользователя",
+  "Logout":"Выход",
+  "currentSession":"Пользователь",
+  "countSession":"Кол-во сесий"
+}

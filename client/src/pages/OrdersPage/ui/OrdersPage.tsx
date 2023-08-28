@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
-import {useTranslation} from "react-i18next";
-import { classNames } from 'shared/lib/classNames/classNames';
 import { useDispatch, useSelector } from 'react-redux';
+import {useTranslation} from "react-i18next";
+import { UserIsAuthSelector } from 'app/providers/storeProvider/reducers/UserSlice';
 import { OrdersSelector, getOrders } from 'app/providers/storeProvider/reducers/OrderSlice';
 import Order, { ColumnsProps } from 'app/providers/storeProvider/types';
-import { UserIsAuthSelector } from 'app/providers/storeProvider/reducers/UserSlice';
 
+import {Orders} from "widgets/Orders"
+
+import { classNames } from 'shared/lib/classNames/classNames';
 import cls from "./OrdersPage.module.scss"
-import { Dropdown, SplitButton } from 'react-bootstrap';
-import OrderList from "shared/ui/List/List";
+import { DropDirection } from 'react-bootstrap/esm/DropdownContext';
+
 
 
 
@@ -16,27 +18,33 @@ const columns:ColumnsProps[] =[
     {
         name:"orderTitle",
         index:1,
-        MdSize:4
+        MdSize:4,
+        textAlign:"left"
     },
     {
         name:"orderProductsCount",
         index:2,
-        MdSize:2
+        MdSize:2,
+        textAlign:"center",
+        cellAlign:"baseline"
     },
     {
         name:"orderDate",
         index:3,
-        MdSize:3
+        MdSize:3,
+        textAlign:"center"
     },
     {
         name:"orderPrice",
         index:4,
-        MdSize:2
+        MdSize:2,
+        textAlign:"center"
     },
     {
         name:"orderActions",
         index:5,
-        MdSize:1
+        MdSize:1,
+        textAlign:"center"
     },
 ]
 const AboutPage = () => {
@@ -62,25 +70,9 @@ const AboutPage = () => {
             <div className={classNames(cls.pageWrapper, {}, ["orders"])}>
             {orders.map((order:Order, index) => (
                 ['end'].map(
-                    (direction:any) => (
-                        <SplitButton
-                            className={""}
-                            autoClose="inside"
-                            key={direction}
-                            id={`dropdown-button-drop-${direction}`}
-                            drop={direction}
-                            variant="secondary"
-                            title={
-                                <OrderList columns={columns}  order={orders[index]} />
-                            }
-                        >
-                            
-                        <Dropdown.Item eventKey={1}>
-                            {order.products.map((product) => (
-                                <>{product.title}</>
-                            ))}
-                        </Dropdown.Item>
-                        </SplitButton>
+                    (direction:DropDirection) => (
+                        <Orders order={order} orders={orders} direction={direction} columns={columns} index={index} />
+                        
                     ),
                 )
             ))}
