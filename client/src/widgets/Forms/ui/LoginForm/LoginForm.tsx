@@ -73,12 +73,12 @@ export const LoginForm:FC<LoginFormProps> = memo(({formType}) => {
         userpassword:""
       }
       const regexEmailExpression = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}/;
-      const regexPasswordExpresstion = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}/
+      const regexPasswordExpresstion = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}/
 
       if (!regexEmailExpression.test(username))  newErrors.username = t("invalidEmailError") 
       if ( !username || username === '' ) newErrors.username = t("emptyEmailError")
 
-      if (!regexPasswordExpresstion.test(userpassword))  newErrors.userpassword = t("invalidPasswordError")
+      if (regexPasswordExpresstion.test(userpassword))  newErrors.userpassword = t("invalidPasswordError")
       if ( !userpassword || userpassword === '' ) newErrors.userpassword = t("emptyPasswordError")
      
   
