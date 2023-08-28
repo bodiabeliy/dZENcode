@@ -61,7 +61,7 @@ export const registerUser = async (email: string, password: string) => {
     });
     console.log(response.data);
   } catch (error: any) {
-    alert(error);
+    // alert(error);
   }
 };
 
