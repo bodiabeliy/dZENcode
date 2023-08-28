@@ -12,9 +12,12 @@
     width: 100%;
 }
 .submitBtn {
-    color: var(--bg-color);
-    background-color: var(--third-color);
+    background-color: var(--bg-color);
     border-radius: 15px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    margin-top: 10px;
+    width: 100%;
 }
 
 .emailConfirm {

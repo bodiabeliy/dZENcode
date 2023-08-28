@@ -14,12 +14,15 @@
 // bad realization!!
 .Modal.light {
     --third-color: #5c8e29;
+    --form-error:red;
+
 }
 .Modal.dark {
     --primary-color: #fff;
     --secondary-color: violet;
     --third-color: rgba(0, 0, 0, 0.2);
     --modal-bg-color:rebeccapurple;
+    --form-error:yellow;
 
 }
 
@@ -48,6 +51,7 @@
 
     .content {
         transform: scale(1);
+        max-width: 600px;
     }
 }
 

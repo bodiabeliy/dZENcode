@@ -72,8 +72,14 @@ export const LoginForm:FC<LoginFormProps> = memo(({formType}) => {
         username:"",
         userpassword:""
       }
-      if ( !username || username === '' ) newErrors.username = 'User name!'
-      if ( userpassword.length <8 ) newErrors.userpassword = 'password must be more than 8!'
+      const regexEmailExpression = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}/;
+      const regexPasswordExpresstion = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}/
+
+      if (!regexEmailExpression.test(username))  newErrors.username = t("invalidEmailError") 
+      if ( !username || username === '' ) newErrors.username = t("emptyEmailError")
+
+      if (!regexPasswordExpresstion.test(userpassword))  newErrors.userpassword = t("invalidPasswordError")
+      if ( !userpassword || userpassword === '' ) newErrors.userpassword = t("emptyPasswordError")
      
   
       return newErrors
@@ -119,6 +125,8 @@ export const LoginForm:FC<LoginFormProps> = memo(({formType}) => {
               isInvalid={!!errors.username}
             />
             <Form.Control.Feedback type="invalid">{errors.username}</Form.Control.Feedback>
+            <Form.Control.Feedback type="valid">Password correct!</Form.Control.Feedback>
+
           </Form.Group>
           <Form.Group as={Col} md="12" controlId="validationCustom02">
             <Form.Label>{t("userPassword")}</Form.Label>
@@ -171,7 +179,7 @@ export const LoginForm:FC<LoginFormProps> = memo(({formType}) => {
         </Form.Group>
       <Button
       className={cls.submitBtn} 
-      onClick={(e) => handleSubmit(e)} type="submit">Submit form</Button>
+      onClick={(e) => handleSubmit(e)} type="submit">{t("LoginLink")}</Button>
     </Form>
         :null
     }

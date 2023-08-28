@@ -23,3 +23,6 @@
     color: var(--primary-color);
     background-color:  var(--bg-color);
 }
+.invalid-feedback {
+    color: var(--form-error) !important;
+}
