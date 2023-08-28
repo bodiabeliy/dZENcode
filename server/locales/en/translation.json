@@ -12,7 +12,7 @@
   "emptyEmailError":"Field not be empty!",
   "invalidEmailError":"email is not correct!",
   "emptyPasswordError":"password is not be empty!",
-  "invalidPasswordError":"password is not correct! (password must consist of upper case letters, special characters and numbers. Length - at least 8 characters)",
+  "invalidPasswordError":"password is not correct! (password must consist of upper case letters, special characters. Length - at least 8 characters)",
 
 
   "userName":"Login",
