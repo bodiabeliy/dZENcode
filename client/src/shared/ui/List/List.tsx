@@ -79,7 +79,10 @@ export const List =({columns, order}:ListProps) => {
               </div> 
               : indx ==3 ? 
               <div className={classNames(cls[`colunm-${indx}`], {}, [cls[column.name]])}>
-                { order.totalSum}
+                <sub>{order.totalSum +" $"}</sub>
+                <div className="span">
+                  {order.totalSum * 36 +" UAH"}
+                </div>
               </div> 
               :
             <ActionButton isBorder={false} iconImage={<TrashIcon />} onClick={() =>RemoveOrder(order) } />
