@@ -4,6 +4,10 @@
   "productsCount": "products",
   "removeModalTitle":"Do you actualy want delete this order?",
   "cancelRemove":"Cancel",
-  "uproveRemove":"Delete"
+  "uproveRemove":"Delete",
+  "addNewProduct":"Add new product",
+  "productAvialableStatus":"Avialable",
+  "productNotAvialableStatus":"Not avialable"
+
 
 }

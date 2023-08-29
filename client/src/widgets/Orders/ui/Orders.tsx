@@ -1,8 +1,14 @@
-import Order, { ColumnsProps } from "app/providers/storeProvider/types";
+import Order, { ColumnsProps, Product } from "app/providers/storeProvider/types";
+import { useEffect, useState } from "react";
 import { Dropdown, SplitButton } from "react-bootstrap";
 import { DropDirection } from "react-bootstrap/esm/DropdownContext";
+import { classNames } from "shared/lib/classNames/classNames";
 import OrderList from "shared/ui/List/List";
+import { OrderDetailze } from "widgets/OrderDetailze";
 
+import cls from "./Orders.module.scss"
+import { useDispatch } from "react-redux";
+import { getOrderCurrentPrices } from "app/providers/storeProvider/reducers/OrderSlice";
 
 interface ProductProps {
     order:Order;
@@ -12,9 +18,28 @@ interface ProductProps {
     index:number;
 }
 export const Orders = ({order, orders, direction, columns, index}:ProductProps) => {
+    const dispatch = useDispatch()
+
+    const [isListCollapsed, setIslistCollapsed] = useState(false)
+    const [productsByOrder, setProductsByOrder] = useState([])
+
+    const listCollapsed = () => {
+        setIslistCollapsed(prev => !prev)
+    };
+
+   
+
+   
+    useEffect(() => {
+        if (order.products.length && orders.length) {
+            //@ts-ignore
+            dispatch(getOrderCurrentPrices({order, orders}))
+        }
+    }, [])
+    
     return ( 
         <SplitButton
-            className={""}
+            className={classNames("ordersList", {[cls.listCollapsed]: isListCollapsed})}
             autoClose="inside"
             key={direction}
             id={`dropdown-button-drop-${direction}`}
@@ -23,12 +48,15 @@ export const Orders = ({order, orders, direction, columns, index}:ProductProps) 
             title={
                 <OrderList columns={columns}  order={orders[index]} />
             }
+            onToggle={() => listCollapsed()}
         >
         
-            <Dropdown.Item eventKey={1}>
-                {order.products.map((product) => (
-                    <>{product.title}</>
-                ))}
+            <Dropdown.Item eventKey={1} >
+                <OrderDetailze 
+                    className={cls.orderDetalizeInfo__wrapper}
+                    products={order.products} 
+                    parentOrderTitle={order.title}
+                />
             </Dropdown.Item>
         </SplitButton>
      );

@@ -1,20 +1,22 @@
 export default interface Order {
   id:number;
   title:string;
-  date:string,
-  description:string
-  products:Product[]
+  date:string;
+  description:string;
+  products:Product[];
+  totalSum:number
 }
 
-interface Product {
+export interface Product {
   id:number;
+  isAvialable:number;
   tiserialnumbertle:number;
   photo:string;
   title:string;
   type:string;
   specification:string;
   guarantee:DatePeriod;
-  price:ProductPrice[];
+  price:ProductPrice;
   date:string;
 }
 
@@ -23,7 +25,7 @@ interface DatePeriod {
  end:string;
 }
 
-interface ProductPrice {
+export interface ProductPrice {
   value:number;
   symbol:string;
   isDefault:number

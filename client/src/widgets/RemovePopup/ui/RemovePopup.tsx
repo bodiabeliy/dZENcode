@@ -19,8 +19,6 @@ interface RemovePopupProps {
 
 export const RemovePopup:FC<RemovePopupProps> = ({order}) => {
     const { t, i18n } = useTranslation("orders");
-
-    console.log("order", order);
     
     return (
     <>

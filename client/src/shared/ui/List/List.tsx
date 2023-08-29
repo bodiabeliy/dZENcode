@@ -12,6 +12,8 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
 import { DateTimeFormmater } from 'shared/lib/dateFormater/dateFormater';
 import TrashIcon from 'shared/assets/icons/trash.svg';
+import { useSelector } from 'react-redux';
+import { OrdersOrderCurrentPricesSelector } from 'app/providers/storeProvider/reducers/OrderSlice';
 
 
 interface ListProps {
@@ -21,7 +23,7 @@ interface ListProps {
 
 export const List =({columns, order}:ListProps) => {
   const { t, i18n } = useTranslation("orders");
-
+  const orderTotalPrice = useSelector(OrdersOrderCurrentPricesSelector)
   const [iszModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [remove, setRemove] = useState<Order>(null)
   const [monthByMonths, setMonthByMonths] = useState("")
@@ -36,6 +38,7 @@ export const List =({columns, order}:ListProps) => {
     setFulldate(DateTimeFormmater(order.date).transformedDate)
   }, [fullDate])
 
+
     const RemoveOrder =(orderObject:Order) => {
       setIsModalOpen(true)
       setRemove(orderObject)
@@ -44,6 +47,8 @@ export const List =({columns, order}:ListProps) => {
     const CloseModal = () => {
       setIsModalOpen(false)
     }
+
+    
 
   return (
    <>
@@ -74,7 +79,7 @@ export const List =({columns, order}:ListProps) => {
               </div> 
               : indx ==3 ? 
               <div className={classNames(cls[`colunm-${indx}`], {}, [cls[column.name]])}>
-                { "price"}
+                { order.totalSum}
               </div> 
               :
             <ActionButton isBorder={false} iconImage={<TrashIcon />} onClick={() =>RemoveOrder(order) } />

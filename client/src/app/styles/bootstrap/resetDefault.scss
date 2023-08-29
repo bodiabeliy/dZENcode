@@ -26,3 +26,11 @@
 .invalid-feedback {
     color: var(--form-error) !important;
 }
+.dropdown-menu {
+    margin-left: 10px;
+    width: calc(100% - var(--sidebar-width-collapsed));
+    background-color: var(--bg-color);
+    border:1px solid var(--primary-color);
+    // pointer-events: none;
+
+}
