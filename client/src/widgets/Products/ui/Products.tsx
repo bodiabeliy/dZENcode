@@ -1,23 +1,26 @@
-import Order, { ColumnsProps } from "app/providers/storeProvider/types";
+import { ColumnsProps } from "app/providers/storeProvider/types";
 import { Dropdown, SplitButton } from "react-bootstrap";
 import { DropDirection } from "react-bootstrap/esm/DropdownContext";
-import OrderList from "shared/ui/List/List";
+import ProductList from "shared/ui/List/List";
 
 
-interface ProductProps {
-   
+interface IProps {
+    products:any[];
+    direction:DropDirection;
+    columns:ColumnsProps[];
+    index:number;
 }
-export const Products = ({order, orders, direction, columns, index}:any) => {
+export const Products = ( {products, direction, columns, index}:IProps) => {
     return ( 
         <SplitButton
-            className={""}
+            className={"productList"}
             autoClose="inside"
             key={direction}
             id={`dropdown-button-drop-${direction}`}
             drop={direction}
             variant="secondary"
             title={
-                <OrderList columns={columns}  order={orders[index]} />
+                <ProductList columns={columns}  dataItem={products[index]} />
             }
         >
         

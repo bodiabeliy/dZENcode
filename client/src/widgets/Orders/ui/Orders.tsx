@@ -10,18 +10,17 @@ import cls from "./Orders.module.scss"
 import { useDispatch } from "react-redux";
 import { getOrderCurrentPrices } from "app/providers/storeProvider/reducers/OrderSlice";
 
-interface ProductProps {
-    order:Order;
-    orders:Order[];
+interface IOrderIProps {
+    order:any;
+    orders:any[];
     direction:DropDirection;
     columns:ColumnsProps[];
     index:number;
 }
-export const Orders = ({order, orders, direction, columns, index}:ProductProps) => {
+export const Orders = ({order, orders, direction, columns, index}:IOrderIProps) => {
     const dispatch = useDispatch()
 
     const [isListCollapsed, setIslistCollapsed] = useState(false)
-    const [productsByOrder, setProductsByOrder] = useState([])
 
     const listCollapsed = () => {
         setIslistCollapsed(prev => !prev)
@@ -46,7 +45,7 @@ export const Orders = ({order, orders, direction, columns, index}:ProductProps) 
             drop={direction}
             variant="secondary"
             title={
-                <OrderList columns={columns}  order={orders[index]} />
+                <OrderList columns={columns}  dataItem={orders[index]} />
             }
             onToggle={() => listCollapsed()}
         >

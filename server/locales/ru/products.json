@@ -1,4 +1,10 @@
 {
-    "pageTitle": "Страница продуктов"
-  }
-  
+  "pageTitle": "Продукты: {{dataCount}}",
+  "pageTitleNotAuthorized":"Пользователь не авторизованый! Войдите в систему для просмотра списка продуктов.",
+  "removeModalTitle":"Вы действительно хотите удалить этот продукт?",
+  "cancelRemove":"Отменить",
+  "uproveRemove":"Удалить",
+  "addNewProduct":"Добавить продукт",
+  "productAvialableStatus":"Есть в наличии",
+  "productNotAvialableStatus":"Нет в наличии"
+}

@@ -7,9 +7,7 @@ import Form from "react-bootstrap/esm/Form";
 import { useTranslation } from "react-i18next";
 import { Button } from "shared/ui/Button/Button";
 
-import { classNames } from "shared/lib/classNames/classNames";
 import cls from "./LoginForm.module.scss"
-import { SocketClient } from "shared/lib/socketClient/socketClient";
 
 interface LoginFormProps {
     formType?:string
@@ -19,7 +17,6 @@ interface LoginFormProps {
 
 export const LoginForm:FC<LoginFormProps> = memo(({formType}) => {
     const { t, i18n } = useTranslation();
-    const count = useSelector(UserEmailSelector)
     const dispatch = useDispatch()
 
     const handleSubmit = (e:any) => {

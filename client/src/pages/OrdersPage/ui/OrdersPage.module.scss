@@ -9,11 +9,11 @@
     margin-bottom: 40px;
     display: flex;
     align-items: center;
-}
-.orderTitle >h1 {
-   font-size:2rem;
-   margin: 0;
-}
-.orderTitle >button {
-    margin-right: 20px;
+    & >h1 {
+        font-size:2rem;
+        margin: 0; 
+    }
+    & >button {
+        margin-right: 20px;
+    }
 }

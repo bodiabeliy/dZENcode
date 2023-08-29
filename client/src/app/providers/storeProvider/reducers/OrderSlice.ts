@@ -1,8 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { io } from 'socket.io-client';
 import { AppDispatch, RootState } from '../index'
-import User, { ProductPrice } from '../types/index';
 import api from '../api';
 import Order from '../types/index';
 

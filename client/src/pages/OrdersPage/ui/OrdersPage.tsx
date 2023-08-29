@@ -48,7 +48,7 @@ const columns:ColumnsProps[] =[
         textAlign:"center"
     },
 ]
-const AboutPage = () => {
+const OrderPage = () => {
     const {t} = useTranslation("orders");
     const dispatch = useDispatch()
     const orders = useSelector(OrdersSelector)
@@ -72,7 +72,7 @@ const AboutPage = () => {
             <div className={classNames(cls.pageWrapper, {}, ["orders"])}>
             <div className={cls.orderTitle}>
                 <ActionButton isBorder={true} iconImage={<AddButton />} onClick={() =>{} } />
-                <h1>{t("pageTitle", { orders: orders.length })}</h1>
+                <h1>{t("pageTitle", { dataCount: orders.length })}</h1>
             </div>
             <div className="ordersList">
             {orders.map((order:Order, index) => (
@@ -91,4 +91,4 @@ const AboutPage = () => {
     );
 };
 
-export default AboutPage;
+export default OrderPage;

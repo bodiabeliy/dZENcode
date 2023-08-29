@@ -12,18 +12,16 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
 import { DateTimeFormmater } from 'shared/lib/dateFormater/dateFormater';
 import TrashIcon from 'shared/assets/icons/trash.svg';
-import { useSelector } from 'react-redux';
-import { OrdersOrderCurrentPricesSelector } from 'app/providers/storeProvider/reducers/OrderSlice';
+
 
 
 interface ListProps {
     columns:ColumnsProps[]
-    order?:Order
+    dataItem?:any
 }
 
-export const List =({columns, order}:ListProps) => {
+export const List =({columns, dataItem}:ListProps) => {
   const { t, i18n } = useTranslation("orders");
-  const orderTotalPrice = useSelector(OrdersOrderCurrentPricesSelector)
   const [iszModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [remove, setRemove] = useState<Order>(null)
   const [monthByMonths, setMonthByMonths] = useState("")
@@ -31,11 +29,11 @@ export const List =({columns, order}:ListProps) => {
 
 
   useEffect(() => {
-    setMonthByMonths(DateTimeFormmater(order.date).monthByMonths)
+    setMonthByMonths(DateTimeFormmater(dataItem.date).monthByMonths)
   }, [monthByMonths])
 
   useEffect(() => {
-    setFulldate(DateTimeFormmater(order.date).transformedDate)
+    setFulldate(DateTimeFormmater(dataItem.date).transformedDate)
   }, [fullDate])
 
 
@@ -61,12 +59,12 @@ export const List =({columns, order}:ListProps) => {
             {
               indx ==0 ? 
               <div className={classNames(cls[`colunm-${indx}`], {}, [cls[column.name]])}>
-                {order.title}
+                {dataItem.title}
               </div>
               : indx ==1 ? 
               <div className={classNames(cls[`colunm-${indx}`], {}, [cls[column.name]])}>
                 <div className="">
-                  {order.products.length}
+                  {dataItem.products.length}
                 </div>
                 <sub>{t("productsCount")}</sub>
               </div> 
@@ -79,13 +77,13 @@ export const List =({columns, order}:ListProps) => {
               </div> 
               : indx ==3 ? 
               <div className={classNames(cls[`colunm-${indx}`], {}, [cls[column.name]])}>
-                <sub>{order.totalSum +" $"}</sub>
+                <sub>{dataItem.totalSum +" $"}</sub>
                 <div className="span">
-                  {order.totalSum * 36 +" UAH"}
+                  {dataItem.totalSum * 36 +" UAH"}
                 </div>
               </div> 
               :
-            <ActionButton isBorder={false} iconImage={<TrashIcon />} onClick={() =>RemoveOrder(order) } />
+            <ActionButton isBorder={false} iconImage={<TrashIcon />} onClick={() =>RemoveOrder(dataItem) } />
             } 
           </Col>
           )

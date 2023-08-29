@@ -197,11 +197,73 @@ const orders = [
     }
   ];
 
+  const productsList = [
+    {
+      id: 1,
+      serialNumber: 1234,
+      isAvialable: 1,
+      photo: 'https://blog.placeit.net/wp-content/uploads/2018/04/MACBOOK-MOCKUP-ON-A-SOFA-WITH-A-CAT.jpg',
+      title: 'MackBook',
+      type: 'Monitors',
+      specification: 'Specification 1',
+      guarantee: {
+        start: '2017-06-29 12:09:33',
+        end: '2017-06-29 12:09:33'
+      },
+      price: {
+          value: 1500,
+          symbol: 'USD', isDefault: 0
+      },
+      order: 1,
+      date: '2017-06-29 12:09:33'
+    },
+    {
+      id: 2,
+      serialNumber: 2345,
+      isAvialable: 0,
+      photo: 'https://unblast.com/wp-content/uploads/2019/10/ZenBook-Pro-Duo-Mockup-1.jpg',
+      title: 'ZenBook',
+      type: 'Monitors',
+      specification: 'Specification 1',
+      guarantee: {
+        start: '2017-06-29 12:09:33',
+        end: '2017-06-29 12:09:33'
+      },
+      price: {
+        value: 2500,
+        symbol: 'USD', isDefault: 0
+      },
+      order: 1,
+      date: '2017-06-29 12:09:33'
+    },
+    {
+      id: 3,
+      serialNumber: 1234,
+      isAvialable: 1,
+      photo: 'https://unblast.com/wp-content/uploads/2020/01/MacBook-Pro-16-Mockup-1.jpg',
+      title: 'MackBook 16',
+      type: 'Monitors',
+      specification: 'Specification 1',
+      guarantee: {
+        start: '2017-06-29 12:09:33',
+        end: '2017-06-29 12:09:33'
+      },
+      price: {
+        value: 1700,
+         symbol: 'USD', isDefault: 0
+      },
+      order: 2,
+      date: '2017-06-29 12:09:33'
+    }
+  ]
+
   authRouter.get('/orders', async (req, res) => {
     res.json(orders);
   });
 
-
+  authRouter.get('/products', async (req, res) => {
+    res.json(productsList);
+  });
 
 
 
