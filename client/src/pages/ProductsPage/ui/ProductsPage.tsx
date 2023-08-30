@@ -12,6 +12,7 @@ import { DropDirection } from 'react-bootstrap/esm/DropdownContext';
 import { Products } from 'widgets/Products';
 import { ActionButton } from 'shared/ui/ActionButton';
 import AddButton from "shared/assets/icons/AddButton.svg"
+import { Select } from 'shared/ui/Select/Select';
 
 
 const columns:ColumnsProps[] =[
@@ -41,6 +42,11 @@ const ProductPage = () => {
              <div className={cls.productTitle}>
                 <ActionButton isBorder={true} iconImage={<AddButton />} onClick={() =>{} } />
                 <h1>{t("pageTitle", { dataCount: products.length })}</h1>
+                <Select 
+                    options={[
+                        {value:"type", name:"по типу"}
+                    ]}
+                />
             </div>
             {products.map((_:any, index) => (
                 ['end'].map(

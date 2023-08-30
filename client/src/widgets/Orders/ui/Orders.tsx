@@ -11,8 +11,8 @@ import { useDispatch } from "react-redux";
 import { getOrderCurrentPrices } from "app/providers/storeProvider/reducers/OrderSlice";
 
 interface IOrderIProps {
-    order:any;
-    orders:any[];
+    order:Order;
+    orders:Order[];
     direction:DropDirection;
     columns:ColumnsProps[];
     index:number;
@@ -34,7 +34,7 @@ export const Orders = ({order, orders, direction, columns, index}:IOrderIProps) 
             //@ts-ignore
             dispatch(getOrderCurrentPrices({order, orders}))
         }
-    }, [])
+    }, [order, orders])
     
     return ( 
         <SplitButton

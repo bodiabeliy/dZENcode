@@ -1,11 +1,11 @@
-import { ColumnsProps } from "app/providers/storeProvider/types";
+import { ColumnsProps, Product } from "app/providers/storeProvider/types";
 import { Dropdown, SplitButton } from "react-bootstrap";
 import { DropDirection } from "react-bootstrap/esm/DropdownContext";
 import ProductList from "shared/ui/List/List";
 
 
 interface IProps {
-    products:any[];
+    products:Product[];
     direction:DropDirection;
     columns:ColumnsProps[];
     index:number;

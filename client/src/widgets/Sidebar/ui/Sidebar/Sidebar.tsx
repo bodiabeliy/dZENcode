@@ -1,8 +1,8 @@
 import {classNames} from "shared/lib/classNames/classNames";
 import cls from './Sidebar.module.scss';
 import {useState} from "react";
-import {ThemeSwitcher} from "shared/ui/ThemeSwitcher";
-import {LangSwitcher} from "shared/ui/LangSwitcher/LangSwitcher";
+import {ThemeSwitcher} from "widgets/ThemeSwitcher/ui/ThemeSwitcher";
+import {LangSwitcher} from "widgets/LangSwitcher/ui/LangSwitcher";
 import { AppLink } from "shared/ui/AppLink/AppLink";
 import { Image } from "shared/ui/Image/Image";
 import { useTranslation } from "react-i18next";
