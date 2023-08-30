@@ -204,7 +204,7 @@ const orders = [
       isAvialable: 1,
       photo: 'https://blog.placeit.net/wp-content/uploads/2018/04/MACBOOK-MOCKUP-ON-A-SOFA-WITH-A-CAT.jpg',
       title: 'MackBook',
-      type: 'Monitors',
+      type: 'MonoBlock',
       specification: 'Specification 1',
       guarantee: {
         start: '2017-06-29 12:09:33',
@@ -223,7 +223,7 @@ const orders = [
       isAvialable: 0,
       photo: 'https://unblast.com/wp-content/uploads/2019/10/ZenBook-Pro-Duo-Mockup-1.jpg',
       title: 'ZenBook',
-      type: 'Monitors',
+      type: 'Laptop',
       specification: 'Specification 1',
       guarantee: {
         start: '2017-06-29 12:09:33',
@@ -242,7 +242,7 @@ const orders = [
       isAvialable: 1,
       photo: 'https://unblast.com/wp-content/uploads/2020/01/MacBook-Pro-16-Mockup-1.jpg',
       title: 'MackBook 16',
-      type: 'Monitors',
+      type: 'MonoBlock',
       specification: 'Specification 1',
       guarantee: {
         start: '2017-06-29 12:09:33',
@@ -250,6 +250,44 @@ const orders = [
       },
       price: {
         value: 1700,
+         symbol: 'USD', isDefault: 0
+      },
+      order: 2,
+      date: '2017-06-29 12:09:33'
+    },
+    {
+      id: 4,
+      serialNumber: 1234,
+      isAvialable: 1,
+      photo: 'https://prod-api.mediaexpert.pl/api/images/gallery/thumbnails/images/52/5221026/Monitor-SAMSUNG-Odyssey-G5-front-8.jpg',
+      title: 'Samsung Odyssay',
+      type: 'Monitors',
+      specification: 'Specification 1',
+      guarantee: {
+        start: '2017-06-29 12:09:33',
+        end: '2017-06-29 12:09:33'
+      },
+      price: {
+        value: 700,
+         symbol: 'USD', isDefault: 0
+      },
+      order: 2,
+      date: '2017-06-29 12:09:33'
+    },
+    {
+      id: 5,
+      serialNumber: 45,
+      isAvialable: 1,
+      photo: 'https://cdn.x-kom.pl/i/setup/images/prod/big/product-new-big,,2022/12/pr_2022_12_8_10_32_40_56_00.jpg',
+      title: 'Dell U22',
+      type: 'Monitors',
+      specification: 'Specification 1',
+      guarantee: {
+        start: '2017-06-29 12:09:33',
+        end: '2017-06-29 12:09:33'
+      },
+      price: {
+        value: 1000,
          symbol: 'USD', isDefault: 0
       },
       order: 2,

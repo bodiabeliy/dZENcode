@@ -22,13 +22,15 @@ export const productState = createSlice({
     gettingProductsSuccess: (state, action: PayloadAction<Product[]>) => {
       state.products = action.payload
     },
-
+    getSortedProducts: (state, action: PayloadAction<string>) => {
+      state.products = state.products.sort((a:any, b:any) => a[action.payload].localeCompare(b[action.payload]))
+    },
     
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { gettingProductsSuccess} = productState.actions
+export const { gettingProductsSuccess, getSortedProducts} = productState.actions
 
 export const ProductsSelector = (state:RootState) => state.ProductReducer.products
 

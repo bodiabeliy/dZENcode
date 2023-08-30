@@ -6,5 +6,9 @@
   "uproveRemove":"Удалить",
   "addNewProduct":"Добавить продукт",
   "productAvialableStatus":"Есть в наличии",
-  "productNotAvialableStatus":"Нет в наличии"
+  "productNotAvialableStatus":"Нет в наличии",
+  "sortingDefault":"Сортировка по:",
+  "selectByType":"типу",
+  "selectByName":"названию"
+
 }

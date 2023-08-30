@@ -6,6 +6,10 @@
   "uproveRemove":"Delete",
   "addNewProduct":"Add new product",
   "productAvialableStatus":"Avialable",
-  "productNotAvialableStatus":"Not avialable"
+  "productNotAvialableStatus":"Not avialable",
+  "sortingDefault":"Sorting by:",
+  "selectByType":"By type",
+  "selectByName":"By name"
+
 }
   

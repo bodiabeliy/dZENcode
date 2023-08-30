@@ -9,6 +9,12 @@
     margin-bottom: 40px;
     display: flex;
     align-items: center;
+
+    &__header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
     & >h1 {
         font-size:2rem;
         margin: 0; 

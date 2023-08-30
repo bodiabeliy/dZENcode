@@ -1,13 +1,13 @@
 import { OrdersSelector } from 'app/providers/storeProvider/reducers/OrderSlice';
 import { UserIsAuthSelector } from 'app/providers/storeProvider/reducers/UserSlice';
 import Order, { ColumnsProps, Product, ProductPrice } from 'app/providers/storeProvider/types';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {useTranslation} from "react-i18next";
 import { useDispatch, useSelector } from 'react-redux';
 import { classNames } from 'shared/lib/classNames/classNames';
 
 import cls from "./ProductsPage.module.scss"
-import { ProductsSelector, getOProducts } from 'app/providers/storeProvider/reducers/ProductSlice';
+import { ProductsSelector, getOProducts, getSortedProducts } from 'app/providers/storeProvider/reducers/ProductSlice';
 import { DropDirection } from 'react-bootstrap/esm/DropdownContext';
 import { Products } from 'widgets/Products';
 import { ActionButton } from 'shared/ui/ActionButton';
@@ -28,6 +28,9 @@ const ProductPage = () => {
     const dispatch = useDispatch()
     const products = useSelector(ProductsSelector)
     const Authorization = useSelector(UserIsAuthSelector)
+
+    const [selectedSort, setSelectedSort] = useState("")
+
     useEffect(() => {
         if (Authorization) {
             //@ts-ignore
@@ -35,17 +38,30 @@ const ProductPage = () => {
         }
            
     }, [Authorization])
+
+    const sortProducts = (sortType:string) => {
+        setSelectedSort(sortType)
+        dispatch(getSortedProducts(sortType))
+    }
+
     return (
         <div>
             {Authorization == true?
             <div className={classNames(cls.pageWrapper, {}, ["products"])}>
-             <div className={cls.productTitle}>
-                <ActionButton isBorder={true} iconImage={<AddButton />} onClick={() =>{} } />
-                <h1>{t("pageTitle", { dataCount: products.length })}</h1>
+             <div className={cls.productTitle__header}>
+                <div className={cls.productTitle}>
+                    <ActionButton isBorder={true} iconImage={<AddButton />} onClick={() =>{} } />
+                    <h1>{t("pageTitle", { dataCount: products.length })}</h1>
+                </div>
                 <Select 
+                    defaultValue={t("sortingDefault")}
+                    value={selectedSort}
                     options={[
-                        {value:"type", name:"по типу"}
+                        {value:"type", name:t("selectByType")},
+                        {value:"title", name:t("selectByName")}
+
                     ]}
+                    onChange={sortProducts}
                 />
             </div>
             {products.map((_:any, index) => (
