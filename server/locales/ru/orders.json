@@ -1,8 +1,8 @@
 {
-  "pageTitle": "Заказы: {{dataCount}}",
+  "pageTitle": "Заказы / {{dataCount}}",
   "pageTitleNotAuthorized":"Пользователь не авторизованый! Войдите в систему для просмотра списка заказов.",
   "productsCount": "Продуктa",
-  "removeModalTitle":"Вы действительно хотите удалить этот приход?",
+  "removeModalTitle":"Вы действительно хотите удалить этот объект ({{uproveRemoving}})?",
   "cancelRemove":"Отменить",
   "uproveRemove":"Удалить",
   "addNewProduct":"Добавить продукт",

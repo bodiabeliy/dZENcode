@@ -17,11 +17,35 @@ import { Select } from 'shared/ui/Select/Select';
 
 const columns:ColumnsProps[] =[
     {
-        name:"orderTitle",
+        name:"productsName",
         index:1,
+        MdSize:3,
+        textAlign:"left"
+    },
+    {
+        name:"productsType",
+        index:2,
+        MdSize:3,
+        textAlign:"left"
+    },
+    {
+        name:"productDate",
+        index:3,
         MdSize:4,
         textAlign:"left"
-    }
+    },
+    {
+        name:"productPrice",
+        index:4,
+        MdSize:1,
+        textAlign:"left"
+    },
+    {
+        name:"orderActions",
+        index:5,
+        MdSize:1,
+        textAlign:"center"
+    },
 ]
 const ProductPage = () => {
     const {t} = useTranslation("products");
@@ -40,7 +64,6 @@ const ProductPage = () => {
     }, [Authorization])
 
     const sortProducts = (sortType:string) => {
-        setSelectedSort(sortType)
         dispatch(getSortedProducts(sortType))
     }
 
@@ -54,6 +77,7 @@ const ProductPage = () => {
                     <h1>{t("pageTitle", { dataCount: products.length })}</h1>
                 </div>
                 <Select 
+                    className={cls.productSelect}
                     defaultValue={t("sortingDefault")}
                     value={selectedSort}
                     options={[
@@ -65,7 +89,7 @@ const ProductPage = () => {
                 />
             </div>
             {products.map((_:any, index) => (
-                ['end'].map(
+                ['up'].map(
                     (direction:DropDirection) => (
                         <Products products={products} direction={direction} columns={columns} index={index} />
                     ),

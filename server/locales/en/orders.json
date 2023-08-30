@@ -1,8 +1,8 @@
 {
-  "pageTitle": "Orders: {{dataCount}}",
+  "pageTitle": "Orders / {{dataCount}}",
   "pageTitleNotAuthorized":"User Not Authorized! Please, log in to system for review list of oprders",
   "productsCount": "products",
-  "removeModalTitle":"Do you actualy want delete this order?",
+  "removeModalTitle":"Do you actualy want delete this element ({{uproveRemoving}})?",
   "cancelRemove":"Cancel",
   "uproveRemove":"Delete",
   "addNewProduct":"Add new product",

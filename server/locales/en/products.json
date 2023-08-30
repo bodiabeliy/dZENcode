@@ -1,5 +1,5 @@
 {
-  "pageTitle": "Products: {{dataCount}}",
+  "pageTitle": "Products / {{dataCount}}",
   "pageTitleNotAuthorized":"User Not Authorized! Please, log in to system for review list of products",
   "removeModalTitle":"Do you actualy want delete this product?",
   "cancelRemove":"Cancel",

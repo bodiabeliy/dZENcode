@@ -35,4 +35,10 @@ svg {
     background-color: var(--main-page);
 }
 
+#dropdown-button-drop-up {
+
+    &::after {
+        display: none;
+    }
+}
 

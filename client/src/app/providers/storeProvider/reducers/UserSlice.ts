@@ -25,16 +25,22 @@ export const userState = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    registerUserSuccess: (state) => {
+      state.email = "";
+      state.password ="";
+    },
     loginUserSuccess: (state, action) => {
       state.email = action.payload.email;
       state.password = action.payload;
       state.isAuth = true;
+      
     },
     logoutUserSuccess: (state) => {
       state.email = '';
       state.password = '';
       state.isAuth = false;
-
+      state.email = "";
+      state.password ="";
     },
 
     userSessionCount: (state, action: PayloadAction<number>) => {
@@ -44,7 +50,7 @@ export const userState = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { loginUserSuccess, logoutUserSuccess,userSessionCount } = userState.actions
+export const { loginUserSuccess, logoutUserSuccess,userSessionCount, registerUserSuccess } = userState.actions
 
 export const UserEmailSelector = (state:RootState) => state.UserReducer.email
 export const UserPasswordSelector = (state:RootState) => state.UserReducer.password
@@ -53,12 +59,13 @@ export const UserCurrentSesstionCountSelector = (state:RootState) => state.UserR
 
 
 // регистрация пользователя
-export const registerUser = async (email: string, password: string) => {
+export const registerUser = (email: string, password: string) =>async (dispatch: AppDispatch) => {
   try {
     const response = await api.post(`/api/auth/registration`, {
       email,
       password,
     });
+    dispatch(registerUserSuccess())
     console.log(response.data);
   } catch (error: any) {
     // alert(error);

@@ -1,5 +1,5 @@
 {
-  "pageTitle": "Продукты: {{dataCount}}",
+  "pageTitle": "Продукты / {{dataCount}}",
   "pageTitleNotAuthorized":"Пользователь не авторизованый! Войдите в систему для просмотра списка продуктов.",
   "removeModalTitle":"Вы действительно хотите удалить этот продукт?",
   "cancelRemove":"Отменить",

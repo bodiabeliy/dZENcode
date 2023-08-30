@@ -12,26 +12,27 @@ import TrashIcon from 'shared/assets/icons/trash.svg';
 import MockMonitor from 'shared/assets/icons/monitor.jpg';
 
 interface RemovePopupProps {
-    order:Order;
+    pageName:string;
+    removeItem:any;
 }
 
 
 
-export const RemovePopup:FC<RemovePopupProps> = ({order}) => {
+export const RemovePopup:FC<RemovePopupProps> = ({removeItem, pageName}) => {
     const { t, i18n } = useTranslation("orders");
     
     return (
     <>
         <div className={classNames(cls.removeModal__wrapper, {}, [])}>
             <div className={cls.removeModal__header}>
-                {t("removeModalTitle")}
+                {t("removeModalTitle", { uproveRemoving: pageName })}
             </div>
             <div className={cls.removeModal__body}>
                 <div className={cls.removeModal__photo}>
                     <Image image={MockMonitor}/>
                 </div>
                 <div className={cls.removeModal__item}>
-                    {order?.title}
+                    {removeItem?.title}
                 </div>
             </div>
             <div className={cls.removeModal__actions}>

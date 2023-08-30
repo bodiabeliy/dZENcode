@@ -45,7 +45,7 @@ export const Orders = ({order, orders, direction, columns, index}:IOrderIProps) 
             drop={direction}
             variant="secondary"
             title={
-                <OrderList columns={columns}  dataItem={orders[index]} />
+                <OrderList pageName="orders" columns={columns}  dataItem={orders[index]} />
             }
             onToggle={() => listCollapsed()}
         >

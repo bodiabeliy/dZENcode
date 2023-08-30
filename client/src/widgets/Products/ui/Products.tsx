@@ -1,5 +1,5 @@
 import { ColumnsProps, Product } from "app/providers/storeProvider/types";
-import { Dropdown, SplitButton } from "react-bootstrap";
+import { DropdownButton } from "react-bootstrap";
 import { DropDirection } from "react-bootstrap/esm/DropdownContext";
 import ProductList from "shared/ui/List/List";
 
@@ -12,19 +12,18 @@ interface IProps {
 }
 export const Products = ( {products, direction, columns, index}:IProps) => {
     return ( 
-        <SplitButton
+        <DropdownButton
             className={"productList"}
             autoClose="inside"
             key={direction}
             id={`dropdown-button-drop-${direction}`}
-            drop={direction}
             variant="secondary"
             title={
-                <ProductList columns={columns}  dataItem={products[index]} />
+                <ProductList pageName="products" columns={columns}  dataItem={products[index]} />
             }
         >
         
-        </SplitButton>
+        </DropdownButton>
      );
 }
  

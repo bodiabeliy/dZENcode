@@ -1,13 +1,18 @@
+import { classNames } from "shared/lib/classNames/classNames";
+import cls from "./Select.module.scss"
+
 interface SelectOptionsProps {
+    className?:string;
     options:any[]
     value:string,
     onChange:(data:any) => void,
     defaultValue:string
 }
 
-export const Select = ({options, value, onChange, defaultValue}:SelectOptionsProps) => {
+export const Select = ({className, options, value, onChange, defaultValue}:SelectOptionsProps) => {
     return ( 
         <select
+        className={classNames(className, {}, [cls.Select])}
             value={value}
             onChange={event => onChange(event.target.value)}
         >

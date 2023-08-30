@@ -16,11 +16,12 @@ import TrashIcon from 'shared/assets/icons/trash.svg';
 
 
 interface ListProps {
-    columns:ColumnsProps[]
-    dataItem?:any
+  pageName:string;
+  columns:ColumnsProps[]
+  dataItem?:any
 }
 
-export const List =({columns, dataItem}:ListProps) => {
+export const List =({pageName, columns, dataItem}:ListProps) => {
   const { t, i18n } = useTranslation("orders");
   const [iszModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [remove, setRemove] = useState<Order>(null)
@@ -50,21 +51,24 @@ export const List =({columns, dataItem}:ListProps) => {
 
   return (
    <>
-    <Modal  type="action" isOpen={iszModalOpen} onClose={() => CloseModal()} children={<RemovePopup order={remove} />} />
+    <Modal  type="action" isOpen={iszModalOpen} onClose={() => CloseModal()} children={<RemovePopup pageName={pageName} removeItem={remove} />} />
     <Container className={cls.ItemRow}>
-      {columns.map((column, indx) => {
+    {
+      pageName =="orders"?
+      
+        columns.length && columns.map((column, indx) => {
           return (
               
           <Col md={columns[indx].MdSize} style={{textAlign:column.textAlign, alignSelf:indx ==1?column.cellAlign:""}}>
             {
               indx ==0 ? 
               <div className={classNames(cls[`colunm-${indx}`], {}, [cls[column.name]])}>
-                {dataItem.title}
+                {dataItem?.title}
               </div>
               : indx ==1 ? 
               <div className={classNames(cls[`colunm-${indx}`], {}, [cls[column.name]])}>
                 <div className="">
-                  {dataItem.products.length}
+                  {dataItem?.products?.length}
                 </div>
                 <sub>{t("productsCount")}</sub>
               </div> 
@@ -81,13 +85,53 @@ export const List =({columns, dataItem}:ListProps) => {
                 <div className="span">
                   {dataItem.totalSum * 36 +" UAH"}
                 </div>
+                  
               </div> 
               :
             <ActionButton isBorder={false} iconImage={<TrashIcon />} onClick={() =>RemoveOrder(dataItem) } />
             } 
           </Col>
           )
-      })}
+      })
+      :pageName =="products"?
+        columns.length && columns.map((column, indx) => {
+          return (
+              
+          <Col md={columns[indx].MdSize} style={{textAlign:column.textAlign, alignSelf:indx ==1?column.cellAlign:""}}>
+            {
+              indx ==0 ? 
+              <div className={classNames(cls[`colunm-${indx}`], {}, [cls[column.name]])}>
+                {dataItem?.title}
+              </div>
+              : indx ==1 ? 
+              <div className={classNames(cls[`colunm-${indx}`], {}, [cls[column.name]])}>
+                <div className="">
+                  {dataItem?.type}
+                </div>
+              </div> 
+              : indx ==2 ?  
+              <div className={classNames(cls[`colunm-${indx}`], {}, [cls[column.name]])}>
+                <sub>{monthByMonths}</sub>
+                <div className="span">
+                  {fullDate}
+                </div>
+              </div> 
+              : indx ==3 ? 
+              <div className={classNames(cls[`colunm-${indx}`], {}, [cls[column.name]])}>
+                <div className="span">
+                  {dataItem?.price?.value + " $"}
+                </div>
+              </div> 
+              :
+            <ActionButton isBorder={false} iconImage={<TrashIcon />} onClick={() =>RemoveOrder(dataItem) } />
+            } 
+          </Col>
+          )
+      })
+      :
+      null
+    }
+
       
     </Container>
    </>
